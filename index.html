@@ -3,813 +3,890 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Front Row — bring Aditi your decision</title>
-<meta name="description" content="Bring your decision. Get the call she would make, the room it came from, and one thing to do this week.">
+<title>Pretty Ambitious — ask me</title>
+<meta name="description" content="Bring me your decision. I'll tell you what I'd do, what it costs, and what to do this week.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Karla:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#FDFBF6; --card:#FFFFFF; --ink:#16130F; --crimson:#C8102E; --indigo:#2B2A66;
-  --marker:#FFE45E; --rule:#DCD6C9; --muted:#6B6458; --sunk:#F4F0E7;
+  --paper:#FFFDF8; --card:#FFFFFF; --ink:#17140F; --crimson:#C8102E; --indigo:#2B2A66;
+  --marker:#FFE45E; --rule:#E6E0D2; --muted:#6E6759; --sunk:#F7F3E9; --mint:#1F6F5C;
   --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
   --sans:"Karla","Helvetica Neue",Arial,sans-serif;
   --pt:env(safe-area-inset-top,0px); --pb:env(safe-area-inset-bottom,0px);
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --paper:#131211; --card:#1C1A18; --ink:#F2EDE4; --crimson:#FF6B6B; --indigo:#A6A2F0;
-    --marker:#6B5A12; --rule:#34302B; --muted:#9C948A; --sunk:#201D1A;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#131211; --card:#1C1A18; --ink:#F2EDE4; --crimson:#FF6B6B; --indigo:#A6A2F0;
-  --marker:#6B5A12; --rule:#34302B; --muted:#9C948A; --sunk:#201D1A;
-}
 *{box-sizing:border-box}
-html{scroll-padding-top:calc(var(--pt) + 64px);-webkit-text-size-adjust:100%}
+html{scroll-padding-top:calc(var(--pt) + 76px);-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
   font-size:17px;line-height:1.55;padding-top:var(--pt);padding-bottom:var(--pb)}
 a{color:var(--indigo)}
 button{font-family:inherit;font-size:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--crimson);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+img,svg{max-width:100%}
 
-.shell{display:flex;min-height:100vh}
-.contents{width:252px;flex:0 0 252px;border-right:1px solid var(--rule);
-  padding:26px 20px calc(26px + var(--pb));position:sticky;top:0;align-self:flex-start;
-  height:100vh;overflow-y:auto;background:var(--paper)}
-.masthead{font-family:var(--serif);font-size:30px;line-height:1;letter-spacing:-.01em}
-.masthead em{font-style:italic;color:var(--crimson)}
-.masthead-sub{font-size:12px;color:var(--muted);margin-top:7px}
-.contents-label{font-family:var(--serif);font-size:15px;color:var(--muted);margin:24px 0 8px;font-style:italic}
-nav ul{list-style:none;margin:0;padding:0}
-nav li{border-top:1px solid var(--rule)}
-nav li:last-child{border-bottom:1px solid var(--rule)}
-nav a{display:block;padding:9px 0;text-decoration:none;color:var(--ink);font-size:15px;line-height:1.3}
-nav a:hover{color:var(--crimson)}
-nav a[aria-current="page"]{color:var(--crimson);font-weight:600}
-nav a[aria-current="page"]::before{content:"— ";color:var(--crimson)}
-.contents-foot{margin-top:20px;font-size:12px;color:var(--muted);line-height:1.5}
-.themebtn{margin-top:16px;background:none;border:1px solid var(--rule);padding:7px 12px;
-  cursor:pointer;font-size:13px;width:100%;text-align:left}
-.themebtn:hover{border-color:var(--ink)}
-.topbar{display:none}
-.scrim{display:none}
+/* ---------- top bar ---------- */
+header{position:sticky;top:0;z-index:40;background:rgba(255,253,248,.94);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--rule);
+  padding-top:var(--pt);margin-top:calc(-1 * var(--pt))}
+.navrow{max-width:1320px;margin:0 auto;display:flex;align-items:center;gap:22px;padding:12px 26px}
+.logo{font-family:var(--serif);font-size:25px;line-height:1;text-decoration:none;color:var(--ink);white-space:nowrap}
+.logo em{font-style:italic;color:var(--crimson)}
+.mainnav{display:flex;gap:20px;flex:1;flex-wrap:wrap}
+.mainnav a{text-decoration:none;color:var(--ink);font-size:15.5px;padding:4px 0;border-bottom:2px solid transparent}
+.mainnav a:hover{border-bottom-color:var(--rule)}
+.mainnav a[aria-current="page"]{border-bottom-color:var(--crimson);color:var(--crimson)}
+.barcta{background:var(--ink);color:var(--paper);border:0;padding:9px 16px;cursor:pointer;
+  font-weight:600;font-size:14.5px;text-decoration:none;white-space:nowrap}
+.barcta:hover{background:var(--crimson)}
+.burger{display:none;background:none;border:1px solid var(--rule);padding:6px 10px;cursor:pointer}
 
-main{flex:1;min-width:0;padding:42px 40px 110px;max-width:860px}
-.eyebrow{font-size:13px;color:var(--crimson);margin:0 0 6px}
-h1{font-family:var(--serif);font-weight:400;font-size:50px;line-height:1.03;margin:0 0 14px;letter-spacing:-.015em}
+/* ---------- layout ---------- */
+.wrap{max-width:1320px;margin:0 auto;padding:34px 26px 100px}
+.narrow{max-width:760px}
+.eyebrow{font-size:13px;color:var(--crimson);margin:0 0 7px;letter-spacing:.01em}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.6vw,58px);line-height:1.02;
+  margin:0 0 16px;letter-spacing:-.015em}
 h1 em{font-style:italic}
-h2{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.12;margin:36px 0 10px}
-h3{font-family:var(--serif);font-weight:400;font-size:22px;margin:0 0 6px}
-.lede{font-size:18px;color:var(--muted);max-width:58ch;margin:0 0 28px}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.6vw,32px);line-height:1.12;margin:44px 0 6px}
+h3{font-family:var(--serif);font-weight:400;font-size:21px;margin:0 0 5px}
+.lede{font-size:18.5px;color:var(--muted);max-width:60ch;margin:0 0 26px}
+.sub{color:var(--muted);font-size:15px;margin:0 0 22px}
+.hr{height:1px;background:var(--rule);border:0;margin:40px 0}
 
-.q-wrap{border:1px solid var(--rule);background:var(--card);padding:26px 24px;max-width:640px}
-.q-count{font-size:13px;color:var(--muted);margin-bottom:10px}
-.q-text{font-family:var(--serif);font-size:29px;line-height:1.15;margin:0 0 20px}
-.opts{display:flex;flex-direction:column;gap:8px}
-.opt{text-align:left;background:var(--paper);border:1px solid var(--rule);padding:13px 15px;cursor:pointer;line-height:1.35}
-.opt:hover{border-color:var(--ink)}
-.q-nav{display:flex;gap:10px;margin-top:20px;align-items:center;flex-wrap:wrap}
-.btn{background:var(--indigo);color:var(--paper);border:0;padding:12px 22px;cursor:pointer;font-weight:600}
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;
+  padding:16px 0 10px}
+.hero-say{border-left:3px solid var(--marker);padding-left:16px;font-family:var(--serif);
+  font-size:21px;font-style:italic;line-height:1.35;color:var(--muted);margin:22px 0 0;max-width:46ch}
+.heroart{display:block}
+
+/* ---------- buttons ---------- */
+.btn{background:var(--indigo);color:#fff;border:0;padding:13px 24px;cursor:pointer;font-weight:600;
+  text-decoration:none;display:inline-block}
 .btn:hover{background:var(--crimson)}
-.btn-ghost{background:none;border:1px solid var(--rule);color:var(--ink);padding:12px 18px;cursor:pointer}
+.btn-ghost{background:none;border:1px solid var(--rule);color:var(--ink);padding:13px 22px;
+  cursor:pointer;text-decoration:none;display:inline-block}
 .btn-ghost:hover{border-color:var(--ink)}
-.btn-sm{padding:6px 12px;font-size:14px}
-.progress{height:2px;background:var(--rule);margin-bottom:18px}
-.progress i{display:block;height:2px;background:var(--crimson);transition:width .25s}
+.btn-sm{padding:7px 13px;font-size:14px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 
-.verdict{border:1px solid var(--ink);background:var(--card);margin:0 0 24px;max-width:700px}
-.verdict-head{padding:15px 22px;border-bottom:1px solid var(--rule);display:flex;
-  justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap}
-.verdict-head .who{font-size:13px;color:var(--muted)}
-.verdict-head .again{font-size:13px;color:var(--crimson)}
-.verdict-body{padding:22px}
-.asked{font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.3;color:var(--muted);margin:0 0 18px}
-.call{font-family:var(--serif);font-size:30px;line-height:1.28;margin:0}
+/* ---------- topic tiles ---------- */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:10px}
+.tile{background:var(--card);border:0;padding:22px 20px 20px;cursor:pointer;text-align:left;display:block}
+.tile:hover{background:var(--sunk)}
+.tile svg{display:block;margin-bottom:12px}
+.tile b{font-family:var(--serif);font-weight:400;font-size:20px;display:block;line-height:1.2}
+.tile span{color:var(--muted);font-size:14.5px;display:block;margin-top:4px}
+.tile i{font-style:normal;color:var(--crimson);font-size:12.5px;display:block;margin-top:10px}
+
+/* ---------- cards ---------- */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.qcard{border:1px solid var(--rule);background:var(--card);padding:20px;cursor:pointer;
+  text-align:left;display:block;width:100%}
+.qcard:hover{border-color:var(--ink)}
+.qcard b{font-family:var(--serif);font-weight:400;font-size:19.5px;display:block;line-height:1.26}
+.qcard p{margin:9px 0 0;color:var(--muted);font-size:15px}
+.qcard .tagline{margin-top:12px}
+
+/* ---------- answer ---------- */
+.answer{border:1px solid var(--ink);background:var(--card);max-width:780px}
+.ahead{display:flex;gap:12px;align-items:center;padding:15px 22px;border-bottom:1px solid var(--rule)}
+.avatar{width:34px;height:34px;border-radius:50%;background:var(--crimson);color:#fff;
+  display:grid;place-items:center;font-family:var(--serif);font-size:18px;flex:0 0 auto}
+.ahead .nm{font-size:14px}
+.ahead .nm b{display:block;font-weight:600}
+.ahead .nm span{color:var(--muted);font-size:13px}
+.abody{padding:24px 22px}
+.asked{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--muted);margin:0 0 16px;line-height:1.3}
+.call{font-family:var(--serif);font-size:clamp(23px,2.5vw,30px);line-height:1.28;margin:0}
 .call mark{background:linear-gradient(180deg,transparent 58%,var(--marker) 58%,var(--marker) 94%,transparent 94%);
   color:inherit;padding:0 2px}
-.field{margin-top:20px}
-.field-label{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--crimson);margin:0 0 3px}
-.field p{margin:0}
-.margin-note{border-left:2px solid var(--marker);padding-left:14px;margin-top:20px;font-size:15px;color:var(--muted)}
-.step{border:1px solid var(--ink);padding:15px 17px;margin-top:20px;background:var(--sunk)}
-.step .field-label{color:var(--ink)}
-.verdict-foot{border-top:1px solid var(--rule);padding:14px 22px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.src{font-size:12px;color:var(--muted);padding:0 22px 16px;margin:0}
-.miss{border:1px dashed var(--crimson);padding:24px;max-width:640px;background:var(--card)}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.fact{border:1px solid var(--rule);padding:14px 15px;background:var(--sunk)}
+.fact .ft{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--crimson);margin-bottom:5px}
+.fact p{margin:0;font-size:15.5px;line-height:1.45}
+.doit{border:1px solid var(--ink);padding:16px 18px;margin-top:14px;background:var(--card)}
+.doit .ft{display:flex;gap:8px;align-items:center;font-size:13px;margin-bottom:5px}
+.doit p{margin:0}
+details.more{margin-top:16px;border-top:1px solid var(--rule);padding-top:12px}
+details.more summary{cursor:pointer;color:var(--indigo);font-size:15px;list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"+ ";color:var(--crimson)}
+details.more[open] summary::before{content:"\2212 "}
+details.more .inner{padding-top:10px;color:var(--muted);font-size:15px}
+.afoot{border-top:1px solid var(--rule);padding:14px 22px;display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- misc ---------- */
+.tagline{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--rule);border-radius:999px;padding:3px 10px;font-size:12.5px;color:var(--muted)}
+.chip.on{border-color:var(--crimson);color:var(--crimson)}
+.filter{border:1px solid var(--rule);border-radius:999px;padding:6px 13px;font-size:13.5px;
+  cursor:pointer;background:none}
+.filter.on{border-color:var(--crimson);color:var(--crimson);background:var(--card)}
+.miss{border:1px dashed var(--crimson);padding:26px;max-width:700px;background:var(--card)}
 .miss h3{color:var(--crimson)}
+.note{background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--marker);
+  padding:14px 17px;max-width:720px;font-size:15px;margin:20px 0}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + var(--pb));
+  background:var(--ink);color:var(--paper);padding:11px 18px;font-size:14px;z-index:70}
 
-.cards{max-width:740px;border-top:1px solid var(--rule)}
-.card{border-bottom:1px solid var(--rule);padding:17px 0;cursor:pointer;background:none;
-  text-align:left;width:100%;display:block}
-.card:hover .card-q{color:var(--crimson)}
-.card-q{font-family:var(--serif);font-size:21px;line-height:1.25;margin:0 0 5px}
-.card-a{margin:0;color:var(--muted);font-size:15.5px}
-.card-meta{font-size:12px;color:var(--muted);margin-top:7px}
-.tagrow{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 20px}
-.tag{border:1px solid var(--rule);background:none;padding:5px 11px;font-size:13px;cursor:pointer;border-radius:999px}
-.tag.on{border-color:var(--crimson);color:var(--crimson)}
-.chip{display:inline-block;border:1px solid var(--rule);border-radius:999px;padding:3px 10px;
-  font-size:12px;margin:0 5px 5px 0;color:var(--muted)}
-.chip.hot{border-color:var(--crimson);color:var(--crimson)}
+/* ---------- question flow ---------- */
+.qwrap{border:1px solid var(--rule);background:var(--card);padding:28px 26px;max-width:640px}
+.prog{height:3px;background:var(--rule);margin-bottom:18px}
+.prog i{display:block;height:3px;background:var(--crimson);transition:width .25s}
+.qn{font-size:13px;color:var(--muted);margin-bottom:9px}
+.qt{font-family:var(--serif);font-size:28px;line-height:1.16;margin:0 0 20px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--rule);padding:13px 15px;
+  cursor:pointer;line-height:1.35}
+.opt:hover{border-color:var(--ink);background:var(--card)}
 
-.drop{border:2px dashed var(--rule);background:var(--card);padding:28px 22px;max-width:680px;text-align:center}
+/* ---------- career map ---------- */
+.mapwrap{border:1px solid var(--rule);background:var(--card);padding:26px 20px;overflow-x:auto}
+.stagebtn{cursor:pointer}
+.stagebtn:hover circle{fill:var(--marker)}
+
+/* ---------- club ---------- */
+.club{display:grid;grid-template-columns:1.1fr .9fr;gap:0;border:1px solid var(--ink);background:var(--card)}
+.clubtext{padding:30px 28px}
+.clubart{background:var(--sunk);display:grid;place-items:center;padding:18px;border-left:1px solid var(--rule)}
+.evt{border:1px solid var(--rule);background:var(--card);padding:18px 20px;margin-bottom:12px}
+.evt .when{font-size:13px;color:var(--crimson)}
+.evt b{font-family:var(--serif);font-weight:400;font-size:21px;display:block;margin:2px 0 5px}
+.evt p{margin:0 0 12px;color:var(--muted);font-size:15px}
+
+/* ---------- writing ---------- */
+.post{border-top:1px solid var(--rule);padding:16px 0;display:block;text-decoration:none;color:inherit}
+.post:hover b{color:var(--crimson)}
+.post b{font-family:var(--serif);font-weight:400;font-size:20px;display:block}
+.post span{color:var(--muted);font-size:14.5px}
+.social{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.soc{border:1px solid var(--rule);background:var(--card);padding:18px 20px;text-decoration:none;
+  color:inherit;display:block}
+.soc:hover{border-color:var(--ink)}
+.soc b{font-family:var(--serif);font-weight:400;font-size:20px;display:block;margin:10px 0 3px}
+.soc span{color:var(--muted);font-size:14.5px}
+
+/* ---------- dashboard ---------- */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule)}
+.kpi{background:var(--card);padding:18px 16px}
+.kpi b{font-family:var(--serif);font-size:34px;font-weight:400;display:block;line-height:1}
+.kpi span{font-size:13px;color:var(--muted)}
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+.panel{border:1px solid var(--rule);background:var(--card);padding:20px}
+.panel h3{margin-bottom:12px}
+.bar{display:grid;grid-template-columns:120px 1fr 30px;gap:10px;align-items:center;
+  margin-bottom:7px;font-size:14px}
+.bar .lab{text-align:right;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .track{min-width:0;background:var(--sunk)}
+.bar i{display:block;height:14px;background:var(--crimson);max-width:100%}
+.bar .n{color:var(--muted);font-size:13px}
+.qrow{border-bottom:1px solid var(--rule);padding:13px 0;display:flex;gap:12px;
+  justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
+.qrow .m{flex:1;min-width:220px}
+.qrow .m p{margin:0 0 5px;font-family:var(--serif);font-size:18px;line-height:1.3}
+.pill{font-size:12px;padding:3px 9px;border:1px solid var(--rule);white-space:nowrap}
+.pill.done{border-color:var(--mint);color:var(--mint)}
+.pill.needs{border-color:var(--crimson);color:var(--crimson)}
+.plan{border:1px solid var(--rule);background:var(--card);padding:20px;margin-bottom:14px}
+.plan h3{margin-bottom:3px}
+.plan .why{color:var(--muted);font-size:14.5px;margin:0 0 12px}
+.plan ol{margin:0;padding-left:20px}
+.plan li{margin-bottom:7px;font-size:15.5px}
+.plan .fmt{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+
+/* ---------- upload ---------- */
+.drop{border:2px dashed var(--rule);background:var(--card);padding:34px 22px;text-align:center}
 .drop.over{border-color:var(--crimson);background:var(--sunk)}
-.drop p{margin:6px 0}
-textarea{width:100%;max-width:680px;min-height:150px;padding:14px;font-family:var(--sans);
-  font-size:16px;border:1px solid var(--rule);background:var(--card);color:var(--ink);line-height:1.5}
-.filelist{max-width:680px;margin-top:14px}
+textarea{width:100%;min-height:170px;padding:15px;font-family:var(--sans);font-size:16px;
+  border:1px solid var(--rule);background:var(--card);color:var(--ink);line-height:1.5}
 .fileitem{display:flex;justify-content:space-between;gap:12px;align-items:center;
   border-bottom:1px solid var(--rule);padding:9px 0;font-size:15px}
 .fileitem span{color:var(--muted);font-size:13px}
 
-.voice{border-left:2px solid var(--rule);padding-left:18px;margin:0 0 28px;max-width:660px}
-.voice-said{font-family:var(--serif);font-size:19px;line-height:1.4;font-style:italic;margin:0 0 12px}
-.voice-she{background:var(--card);border:1px solid var(--rule);padding:15px 17px}
-.voice-she .who{font-size:12px;color:var(--crimson);margin:0 0 6px}
-
-.fw{border-top:1px solid var(--rule);padding:19px 0;max-width:700px}
-.fw ol{margin:12px 0 0;padding-left:20px}
-.fw li{margin-bottom:7px}
-.fw .src{padding:0;margin-top:12px}
-.res{border-top:1px solid var(--rule);padding:14px 0;max-width:700px}
-.res a{font-family:var(--serif);font-size:20px;text-decoration:none}
-.res a:hover{color:var(--crimson)}
-.res p{margin:3px 0 0;color:var(--muted);font-size:15px}
-.channel{display:flex;gap:16px;align-items:baseline;border:1px solid var(--rule);
-  background:var(--card);padding:16px 18px;margin-bottom:12px;max-width:700px;flex-wrap:wrap}
-.channel a{font-family:var(--serif);font-size:22px;text-decoration:none}
-.channel p{margin:0;color:var(--muted);font-size:15px;flex:1;min-width:200px}
-
-.stat{display:flex;gap:30px;flex-wrap:wrap;border-top:1px solid var(--rule);
-  border-bottom:1px solid var(--rule);padding:18px 0;margin-bottom:6px}
-.stat div b{font-family:var(--serif);font-size:34px;font-weight:400;display:block;line-height:1}
-.stat div span{font-size:13px;color:var(--muted)}
-.bars{max-width:700px;margin:12px 0 0}
-.bar{display:grid;grid-template-columns:150px 1fr 34px;align-items:center;gap:10px;
-  margin-bottom:7px;font-size:14px}
-.bar .track{min-width:0}
-.bar i{display:block;height:13px;background:var(--crimson);max-width:100%}
-.bar .lab{text-align:right;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bar .n{color:var(--muted);font-size:13px}
-.queue{max-width:740px;border-top:1px solid var(--rule)}
-.qrow{border-bottom:1px solid var(--rule);padding:14px 0;display:flex;gap:14px;
-  justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
-.qrow .qmain{flex:1;min-width:240px}
-.qrow .qq{font-family:var(--serif);font-size:19px;margin:0 0 4px;line-height:1.3}
-.pill{font-size:12px;padding:3px 9px;border:1px solid var(--rule);white-space:nowrap}
-.pill.done{border-color:var(--indigo);color:var(--indigo)}
-.pill.needs{border-color:var(--crimson);color:var(--crimson)}
-.gap{border-bottom:1px solid var(--rule);padding:13px 0;max-width:700px}
-.gap b{font-family:var(--serif);font-weight:400;font-size:19px}
-.gap span{display:block;color:var(--muted);font-size:14px}
-
-.note{background:var(--card);border:1px solid var(--marker);border-left:4px solid var(--marker);
-  padding:13px 16px;max-width:680px;font-size:15px;margin:18px 0}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + var(--pb));
-  background:var(--ink);color:var(--paper);padding:11px 18px;font-size:14px;z-index:60}
-.split{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
-.split .btn,.split .btn-ghost{flex:1;min-width:190px;text-align:center}
-
-@media (max-width:880px){
-  .shell{display:block}
-  .contents{position:fixed;top:0;left:0;height:100%;z-index:50;transform:translateX(-102%);
-    transition:transform .22s ease;width:min(268px,68vw);flex:none;padding-top:calc(20px + var(--pt))}
-  .contents.open{transform:none;box-shadow:0 0 0 100vmax rgba(0,0,0,.4)}
-  .scrim{display:block;position:fixed;inset:0;z-index:40}
-  .scrim[hidden]{display:none}
-  .topbar{display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:30;
-    background:var(--paper);border-bottom:1px solid var(--rule);padding:10px 16px;
-    padding-top:calc(10px + var(--pt));margin-top:calc(-1 * var(--pt))}
-  .topbar .masthead{font-size:22px;flex:1}
-  .burger,.themetop{background:none;border:1px solid var(--rule);padding:7px 11px;cursor:pointer;line-height:1}
-  main{padding:24px 18px 90px;max-width:none}
-  h1{font-size:35px} h2{font-size:24px} .q-text{font-size:23px} .call{font-size:25px}
-  .q-wrap{padding:20px 17px} .verdict-body{padding:18px}
-  .bar{grid-template-columns:104px 1fr 28px;gap:8px}.bar .lab{font-size:12.5px}
+@media (max-width:1040px){
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .grid3{grid-template-columns:repeat(2,1fr)}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .panels{grid-template-columns:1fr}
+  .hero{grid-template-columns:1fr;gap:26px}
+  .club{grid-template-columns:1fr}
+  .clubart{border-left:0;border-top:1px solid var(--rule)}
+}
+@media (max-width:780px){
+  .bar{grid-template-columns:96px 1fr 26px;gap:8px}
+  .mainnav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--paper);
+    border-bottom:1px solid var(--rule);flex-direction:column;gap:0;padding:6px 26px 14px}
+  .mainnav.open{display:flex}
+  .mainnav a{padding:10px 0;border-bottom:1px solid var(--rule)}
+  .burger{display:block;padding:6px 9px;font-size:13.5px}
+  .navrow{gap:10px;padding:10px 16px}
+  .logo{font-size:20px;flex:1 1 auto;min-width:0;overflow:hidden;
+    text-overflow:ellipsis;white-space:nowrap}
+  .barcta{padding:8px 12px;font-size:13.5px}
+  .wrap{padding:24px 18px 90px}
+  .grid3,.grid2,.social,.facts{grid-template-columns:1fr}
+  .tiles{grid-template-columns:1fr}
+  .kpis{grid-template-columns:1fr 1fr}
+  .qwrap{padding:22px 18px}
+  .abody{padding:20px 18px}
 }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <button class="burger" id="burger" aria-label="Open contents" aria-expanded="false">&#9776;</button>
-  <div class="masthead">Front <em>Row</em></div>
-  <button class="themetop" id="themetop" aria-label="Switch theme"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true" style="vertical-align:-2px"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1a7 7 0 010 14z" fill="currentColor"/></svg></button>
-</div>
+<header>
+  <div class="navrow">
+    <a class="logo" href="#/" >Pretty <em>Ambitious</em></a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">Menu</button>
+    <nav class="mainnav" id="mainnav"></nav>
+    <a class="barcta" href="#/ask">Ask me</a>
+  </div>
+</header>
 
-<div class="scrim" id="scrim" hidden></div>
+<main id="main" tabindex="-1"></main>
 
-<div class="shell">
-  <aside class="contents" id="contents">
-    <div class="masthead">Front <em>Row</em></div>
-    <div class="masthead-sub">Aditi's judgement, without her calendar</div>
-    <div class="contents-label">Contents</div>
-    <nav><ul id="nav"></ul></nav>
-    <button class="themebtn" id="themebtn">Switch to dark</button>
-    <div class="contents-foot">
-      <span id="rowcount"></span> decisions on file.<br>Every one sourced to a room.<br>
-      <span id="profileline"></span>
-    </div>
-  </aside>
-  <main id="main" tabindex="-1"></main>
-</div>
-
-<script src="corpus.js"></script>
 <script>
-/* ==========================================================================
-   FRONT ROW
-   Everything runs in the browser. No server, no model calls, no uploads.
-   Matching is deterministic tag overlap against CORPUS in corpus.js.
-   ========================================================================== */
+var DATA = {"corpus": [{"id": "C-01", "q": "Would you take the seed-stage offer or stay where I am?", "call": "Take it, but not for the equity - take it because you will learn in nine months what your current job will teach you in four years.", "how": "The answer she gave a founder backstage, and the six founder stage interviews in the can.", "cost": "A pay cut you will feel for about eighteen months, and roughly two years before the equity means anything at all. The real cost is the safety of being good at something - you will be bad at your job again for a while.", "unless": "If you cannot cover three months of rent without this salary, stay. Optionality you cannot afford is not optionality, it is a gamble with a story attached.", "do": "By Sunday, write down the one thing you would learn there that you cannot learn where you are. If you cannot fill the line in one sentence, the offer is not the reason you want to leave.", "again": "yes", "note": "Dear reader who has had the offer email open in a tab for nine days.", "src": "E-01.2, E-03.4, E-04.1", "tags": ["job-offer", "stay-or-go", "deciding-now", "tech", "pre-decision"]}, {"id": "C-02", "q": "How do I actually get into that room?", "call": "Stop trying to get into the room and make one thing the room has to react to - the invitations follow the artefact, never the other way round.", "how": "Cannes Lions week, and the keynote to 300 people.", "cost": "Three to six months of making things nobody asks for, in public. Money: almost none. What you give up is the comfort of being promising rather than judged.", "unless": "If you already have something people point at and you still cannot get in, then it is a network problem, not an output problem - and the fix is ten specific asks, not more work.", "do": "This week, publish one thing with your name on it and send it to three people who were in a room you want to be in. Not asking for anything. Just the thing.", "again": "yes", "note": "Dear reader who has watched the same clip six times and still not sent the email.", "src": "E-01.1, E-05.2, E-07.1, E-04.2", "tags": ["visibility", "no-network", "pre-decision", "start-something", "tech", "london"]}, {"id": "C-03", "q": "I have about GBP 600. Is the week actually worth it?", "call": "Worth it only if you go with three names and a reason each - otherwise you are buying a very expensive feeling of having been nearby.", "how": "The post about what that week actually cost her - 890K views, 611 sign-ups, her second-highest converting piece.", "cost": "GBP 600 and four days, plus the two weekends afterwards you will spend following up. If you do not block those weekends now, you have spent the 600 on nothing.", "unless": "If you are going to meet people you could email instead, save the money. Proximity is only worth paying for when the conversation cannot happen any other way.", "do": "Before you book, write the three names and one sentence on why each should care about you. If you cannot fill all three sentences by Friday, do not go.", "again": "not like that", "note": "Dear reader who has opened the booking page three times this week.", "src": "E-01.4, E-03.3, E-07.3", "tags": ["spend-money", "500-2k", "pre-decision", "deciding-now", "visibility", "london"]}, {"id": "C-04", "q": "How do I build in public without annoying my employer?", "call": "Post about the decision, never the deal - your judgement is yours to share, your employer's information is not.", "how": "The three questions she asks before posting anything - 1.4M views, 340 sign-ups.", "cost": "Roughly two hours a week and a low background hum of self-consciousness. What you give up is the best material, because the best material is usually the confidential material.", "unless": "If your contract or your manager has said no explicitly, stop. Building in public is not worth a disciplinary, and the version of this that works is one conversation with your manager, not a clever workaround.", "do": "This week, write your own three-line rule for what you will never post. Show it to your manager. Their agreement is the thing that makes the next hundred posts easy.", "again": "yes", "note": "Dear reader who drafts posts and deletes them before anyone sees.", "src": "E-01.9, E-03.1, E-05.1", "tags": ["visibility", "employer-risk", "deciding-now", "tech", "start-something"]}, {"id": "C-05", "q": "I took the job. What do I actually do in the first 30 days?", "call": "Spend the first thirty days finding out what the person who hired you is quietly afraid of, and fix one small piece of it.", "how": "The six founder stage interviews - the same answer came back from nearly all of them.", "cost": "About four weeks of holding your tongue while you understand the place. What you give up is the urge to prove yourself in week one, which is the thing most people cannot give up.", "unless": "If you were hired into a crisis with an explicit mandate, invert this - act in week one, and learn while you are acting. Listening tours are for stable companies.", "do": "In your first week, ask your manager: what is the thing you are hoping I quietly take off your plate? Write the answer down. That is your first 30 days.", "again": "yes", "note": "Dear reader who starts on Monday and has already rewritten the intro message four times.", "src": "E-01.8, E-04.1", "tags": ["post-decision", "first-90-days", "already-committed", "tech", "job-offer"]}, {"id": "C-06", "q": "I am not in London. How would you do this from where I am?", "call": "Do not move for the room - build the thing where you are until someone in the room has a reason to fly you in.", "how": "The six-country speaking run, four months, and the reader replies that come in from outside the UK.", "cost": "Slower. Expect the first eighteen months to feel like shouting into a well. Money: less than moving, by an order of magnitude. What you give up is the illusion that geography was the obstacle.", "unless": "If your work genuinely requires being physically present - the job is in a building, the customers are in one city - then move, and move properly rather than visiting.", "do": "This week, find the three people doing your version of this in your city. Not the London ones. Message all three. A local room you can walk to beats a global one you cannot.", "again": "yes", "note": "Dear reader who keeps reading advice written for a city you do not live in.", "src": "E-01.3, E-04.7, E-04.8", "tags": ["relocate", "outside-uk", "india", "no-network", "pre-decision"]}, {"id": "C-07", "q": "Can you do a version of this for someone outside tech?", "call": "The framing transfers completely - only the vocabulary changes, and the vocabulary was never the point.", "how": "The keynote to 300 in the room, and the newsletter archive of 42,000 readers who are not all in tech.", "cost": "Nothing, except the effort of translating it yourself. What you give up is the excuse that this advice was for other people.", "unless": "If the advice depends on a specific mechanic - fundraising, equity, a tech hiring market - then it does not transfer, and you should ignore it rather than force it.", "do": "This week, take the last piece of advice you liked and rewrite it in the language of your own industry. If it survives translation, it was real advice.", "again": "yes", "note": "Dear reader who likes the thinking but keeps getting told it is not for your industry.", "src": "E-01.7, E-04.3, E-04.6", "tags": ["non-tech", "pre-decision", "start-something", "visibility", "deciding-now"]}, {"id": "C-08", "q": "What would you have asked them?", "call": "Ask the question you would be slightly embarrassed to ask in front of your peers - it is nearly always the only one worth the room's time.", "how": "The six founder stage interviews, and the backstage Q&A that was never recorded.", "cost": "About thirty seconds of feeling stupid. What you give up is looking clever, which is what the other twenty questions in the room are buying.", "unless": "If the room is genuinely hostile or the person is fragile, do not - some rooms are not safe places to be direct, and reading that correctly is also judgement.", "do": "Before your next meeting, write the one question you are slightly afraid to ask. Ask it in the first ten minutes, while you still have the nerve.", "again": "yes", "note": "Dear reader who thinks of the right question in the taxi home.", "src": "E-05.2, E-03.4, E-04.5", "tags": ["deciding-now", "tech", "pre-decision", "visibility"]}, {"id": "C-09", "q": "Should I go to the big conference this year?", "call": "Go once, and go to the dinners rather than the stages - the stage content will be on YouTube in a fortnight and the dinners will not.", "how": "Cannes Lions week - 40 clips, half of them still uncut, and the post about it did 3.9M views and 62 sign-ups.", "cost": "Several thousand pounds and a week you do not get back. What you give up is a week of making your own things while you watch other people talk about theirs.", "unless": "If you are going because it is the done thing and you cannot name a single person you need to see there, the money is better spent on almost anything else.", "do": "By Friday, list who you want at the dinner. If your list is shorter than four, do not buy the ticket - organise the dinner instead, in your own city, for a tenth of the price.", "again": "not like that", "note": "Dear reader who keeps seeing everyone else's photos from the same week.", "src": "E-03.2, E-04.2", "tags": ["spend-money", "over-2k", "pre-decision", "visibility", "deciding-now"]}, {"id": "C-10", "q": "Should I take the brand deal?", "call": "Take it only if you would have mentioned them for free - the moment the answer is no, the audience can tell, and you have sold something you cannot buy back.", "how": "The post about the opportunities she said no to this year - 1.1M views, no direct sign-ups, and the highest trust of anything she has published.", "cost": "Usually more editing than the fee justifies. What you give up is the ability to say the same thing next month and be believed.", "unless": "Early on, with no audience to lose, take the money and learn how the deals work. This rule is for people with something to protect.", "do": "This week, write the list of things you would never take money to say. Keep it somewhere you will see it when the email arrives.", "again": "no", "note": "Dear reader with an offer in the inbox and a bad feeling you cannot justify.", "src": "E-03.5, E-05.1", "tags": ["spend-money", "deciding-now", "creator", "visibility", "already-committed"]}, {"id": "C-11", "q": "Should I do the unpaid speaking gig?", "call": "Do the first three unpaid, then stop - after the third, you have the tape, and the tape is what gets you paid.", "how": "The six-country speaking run, four months, and the keynote to 300 that has been used exactly once.", "cost": "A day of prep, a day of travel, and the quiet cost that unpaid work tends to attract more unpaid work.", "unless": "If the room has nobody in it who can hire you or hire someone like you, and you already have footage, it is not exposure - it is a favour, and you should price it as one.", "do": "Say yes, then ask for one thing that costs them nothing: a recording, or the attendee list. Ask before you accept, this week, while you still have leverage.", "again": "not like that", "note": "Dear reader who has said yes to three of these and is starting to resent it.", "src": "E-03.5, E-04.3, E-04.7", "tags": ["unpaid", "deciding-now", "visibility", "pre-decision", "no-budget"]}, {"id": "C-12", "q": "Should I post this or keep it to myself?", "call": "If you would not say it to your sister on the phone, do not post it - that filter has never once been wrong.", "how": "The three questions she asks before posting anything - 1.4M views, 68K saves, 340 sign-ups.", "cost": "About ten minutes of thinking before you press publish. What you give up is roughly a third of your ideas, which is the correct third.", "unless": "If the only reason you are hesitating is that it is unflattering to you rather than to someone else, post it - that discomfort is usually the signal it is worth reading.", "do": "Before your next post, run it past the phone test out loud. If you hear yourself hedging, the post is not ready.", "again": "yes", "note": "Dear reader with a draft you have rewritten four times and still not published.", "src": "E-03.1, E-05.1", "tags": ["visibility", "employer-risk", "deciding-now", "creator"]}, {"id": "C-13", "q": "I keep opening this and not deciding. What is wrong with me?", "call": "Nothing is wrong with you - you are missing one fact, and until you name it you will keep reopening the tab instead of deciding.", "how": "The 2,600 reader replies a month, which she calls the actual research.", "cost": "Fifteen minutes and a pen. What you give up is the comfort of calling indecision 'thinking about it'.", "unless": "If you have named the missing fact and still cannot decide, the honest answer is that you do not want it. That is allowed, and it is faster than another month of this.", "do": "Today, write the single fact that would settle this. Then write who has it. Then ask them, this week. Most decisions are a missing fact wearing a costume.", "again": "yes", "note": "Dear reader who has opened this three times and is still deciding.", "src": "E-01.12, E-04.8", "tags": ["deciding-now", "pre-decision", "stay-or-go", "no-budget", "drifting"]}, {"id": "C-14", "q": "Someone sent me this because they think I need it. Do I?", "call": "The person who forwarded it knows something about your situation that you have not said out loud yet - start there, not with the content.", "how": "The walk-home voice notes, nine hours of them, where most of this thinking actually happens.", "cost": "One uncomfortable conversation. What you give up is the version of yourself who has not been told this.", "unless": "If they forward you everything, ignore it - this only means something when it is the first thing they have ever sent you.", "do": "This week, ask them directly: what made you send me this? The answer is usually more useful than whatever they sent.", "again": "yes", "note": "Dear reader whose manager sent you a clip and you are not sure how to feel about it.", "src": "E-01.11, E-04.4", "tags": ["pre-decision", "deciding-now", "tech", "stay-or-go"]}, {"id": "C-15", "q": "Should I start the newsletter?", "call": "Start it, and commit to twenty issues before you let yourself judge it - almost everyone quits at issue six, which is exactly where it stops being embarrassing.", "how": "The newsletter archive - 42,000 people, and her own note that she lost the thread.", "cost": "Two to four hours a week, every week. What you give up is the ability to have opinions privately.", "unless": "If you have nothing you keep answering in DMs, wait. A newsletter is a faster way to answer a question people are already asking you, not a way to find one.", "do": "This week, write down the question you have answered more than three times this month. That is issue one. Send it by Sunday, to twenty people.", "again": "yes", "note": "Dear reader with a Substack account created eight months ago and nothing in it.", "src": "E-04.6, E-05.2, E-05.3", "tags": ["start-something", "creator", "pre-decision", "no-budget", "visibility"]}, {"id": "C-16", "q": "Should I try to reply to everyone?", "call": "Answer the question once, properly, in public - answering the same thing 2,600 times privately feels like generosity and is actually a way of hiding.", "how": "Two DM sprints a day, 44 useful questions answered, and a queue that still ends the day above 130.", "cost": "The public answer takes four times as long to write. What you give up is the intimacy of the private reply, which is a real loss and worth naming.", "unless": "Early on, reply to everyone - it is how you find out what people actually want. This rule only applies once the same question arrives for the tenth time.", "do": "This week, take the question you answered most often and write it once, properly. Then reply to the next ten askers with that link and one personal line.", "again": "not like that", "note": "Dear reader whose inbox is a to-do list written by other people.", "src": "E-02, E-04.8, E-05.7", "tags": ["creator", "deciding-now", "visibility", "already-committed", "burnout"]}, {"id": "C-17", "q": "Do I need a personal brand to get anywhere?", "call": "You do not need a brand, you need one thing you are known for being right about - the brand is what other people call it afterwards.", "how": "The keynote to 300 in the room, which she says should have been ten things rather than one talk.", "cost": "About a year of saying the same thing while it feels repetitive to you and new to everyone else. What you give up is range, temporarily.", "unless": "If your work already speaks for itself in a small market - you are hired by reputation and the pipeline is full - this is a distraction. Do the work instead.", "do": "This week, write the one sentence you want people to repeat about you when you are not in the room. Then check whether your last ten posts would produce it.", "again": "yes", "note": "Dear reader who has been told to build a personal brand and finds the phrase embarrassing.", "src": "E-04.3, E-05.5", "tags": ["visibility", "pre-decision", "tech", "non-tech", "start-something"]}, {"id": "C-18", "q": "Should I say yes to the travel? It is a lot of countries in a short time.", "call": "Say yes to half of it - the half where you would have gone anyway - and give the other half to someone who has never been asked.", "how": "The six-country speaking run, four months, and her own note that there is only one of her.", "cost": "Four months of your life and every evening in it. What you give up is the thing you were going to make while you were on the plane.", "unless": "If this is the run that establishes you and it will not come round again, take all of it, and accept that you will make nothing else that year. Just decide that on purpose.", "do": "Before you confirm, put the trips in a calendar next to the things you already promised. Do it this week, and look at it honestly rather than optimistically.", "again": "not like that", "note": "Dear reader looking at an itinerary that looked exciting when it was theoretical.", "src": "E-04.7, E-05.5", "tags": ["spend-money", "over-2k", "deciding-now", "already-committed", "visibility", "burnout"]}, {"id": "C-19", "q": "My friend is going through exactly this. How do I actually help?", "call": "Send them the specific thing, not the encouragement - 'you have got this' is for you, the link with a line about why is for them.", "how": "The reader replies, 2.6K a month, and the messages that arrive saying someone forwarded this.", "cost": "One minute. What you give up is nothing, which is why it is strange that so few people do it.", "unless": "If they have not asked and are not ready, hold it. A forwarded link at the wrong moment reads as a judgement about how they are living.", "do": "Today, forward it with one sentence: here is the bit that made me think of you. The sentence is the whole gift.", "again": "yes", "note": "Dear reader who keeps sending things to one particular person.", "src": "E-01.5, E-07.4, E-04.8", "tags": ["pre-decision", "no-budget", "deciding-now", "stay-or-go"]}, {"id": "C-20", "q": "Should I go to the event if I do not know anyone there?", "call": "Go, but go with a job - volunteer, ask questions, introduce two people to each other - because standing in a room with no role is the only version of this that genuinely does not work.", "how": "Cannes Lions week, where she says everyone only saw the glamour.", "cost": "The ticket, an evening, and about an hour of feeling conspicuous at the start. What you give up is the option of telling yourself you would have gone if someone had invited you.", "unless": "If you are exhausted and the event is optional, stay home. Networking done from an empty tank produces nothing and costs you the weekend.", "do": "Before you go, message the organiser this week and offer to help with something. A role beats a ticket every time.", "again": "yes", "note": "Dear reader who has bought the ticket and is now hoping something comes up.", "src": "E-04.2, E-07.1", "tags": ["visibility", "no-network", "spend-money", "under-500", "pre-decision"]}, {"id": "C-21", "q": "Expensive ticket or the cheap one?", "call": "Cheap ticket, and spend the difference on getting there early and staying an extra night - the value is in the margins of the event, never the middle of it.", "how": "The post about what that week actually cost her, and 40 clips from Cannes of which half are still uncut.", "cost": "The difference is usually a few hundred pounds and a better lanyard. What you give up is access to sessions that will be online within the fortnight anyway.", "unless": "If the expensive tier is the only one with the dinner or the small-room session, buy it - you are buying the room size, not the badge.", "do": "Before booking, check exactly what the top tier includes that the cheap one does not. If the answer is seating and a tote bag, you have your answer.", "again": "yes", "note": "Dear reader with two tabs open and a spreadsheet you have not filled in.", "src": "E-03.3, E-04.2, E-07.3", "tags": ["spend-money", "500-2k", "deciding-now", "pre-decision", "no-budget"]}, {"id": "C-22", "q": "Should I ask them for the introduction?", "call": "Ask, but write the introduction for them - a forwardable paragraph they can send without editing is the difference between yes and eventually.", "how": "The backstage Q&A she calls the best answer she ever gave, which nobody recorded.", "cost": "Ten minutes of writing and a small amount of nerve. What you give up is the ability to tell yourself you never got the chance.", "unless": "If you have not given them anything and this is your first contact, do not ask yet - one useful thing first, then the ask, and the gap between them should be weeks not hours.", "do": "This week, write the three-line intro in the third person and send it with: feel free to send this on, or ignore it entirely, no awkwardness either way.", "again": "yes", "note": "Dear reader who has drafted the message and not sent it.", "src": "E-04.5, E-05.2", "tags": ["no-network", "visibility", "deciding-now", "pre-decision"]}, {"id": "C-23", "q": "Should I take the title or the money?", "call": "Take the money - titles reset the moment you change company, and the money compounds from the day it lands.", "how": "The six founder stage interviews, and the walk-home voice notes where she keeps returning to this one.", "cost": "Usually a slightly less impressive line on LinkedIn for two years. What you give up is the version of you that other people are impressed by at parties.", "unless": "If the title unlocks a specific room you cannot otherwise enter - a board seat, a speaking circuit, a regulated qualification - take the title and negotiate the money next cycle.", "do": "Before you reply, ask for both. This week. The worst outcome of asking is the offer you already have.", "again": "yes", "note": "Dear reader comparing two offers and pretending the title does not matter to you.", "src": "E-04.1, E-04.4", "tags": ["job-offer", "negotiate", "deciding-now", "pay-cut", "tech"]}, {"id": "C-24", "q": "Should I quit and do this full time?", "call": "Not yet - go part time or go on the side until the thing has paid you twice from two different people, and then go properly.", "how": "Her own notes on what she keeps and kills, and the newsletter archive she describes as dormant because she lost the thread.", "cost": "Six to twelve months of doing two jobs badly at the same time. What you give up is sleep and most of your weekends, and you should know that before rather than after.", "unless": "If you have runway, no dependents and a clear twelve-month window, jumping is the faster route and the part-time version will quietly kill it. Be honest about which of those three you actually have.", "do": "This week, write the number you need to earn monthly for this to be viable, and the date by which you need to hit it. Put the date in your calendar. Vague plans do not survive month four.", "again": "not like that", "note": "Dear reader who has been thinking about making the move for two years.", "src": "E-05.1, E-05.3, E-04.6", "tags": ["stay-or-go", "start-something", "creator", "deciding-now", "pre-decision", "burnout", "drifting"]}, {"id": "S-01", "q": "Everyone my age is ahead of me. Should I change what I am doing?", "call": "Do not change the plan, change the data you are reading - the mean age of a successful founder is 45, not 25, and you have been racing a timeline that does not exist.", "how": "you were never behind, April 2026 - the Kauffman/MIT study on 2.7 million founders.", "cost": "Fifteen minutes and a pen. What you give up is the story that you are behind, which you have been using as fuel and which has been costing you more than it produces.", "unless": "If you have genuinely been drifting for three years with no answer to what you are optimising for, reassurance is the wrong medicine. You need the audit, not the permission.", "do": "This week, write the three people whose careers make you feel behind, and next to each, whether you have actually spoken to them in the last year. Then write what you are optimising for in five years, in one sentence.", "again": "yes", "note": "Dear reader who closed LinkedIn, opened it again, and closed it again.", "src": "SUBSTACK: you were never behind, 14 Apr 2026 - see also her comment reply, same post, for the 'different fuel' framing", "tags": ["comparison", "am-i-behind", "stay-or-go", "deciding-now", "mid-career"]}, {"id": "S-02", "q": "I want to start posting but I am doing it out of fear, not confidence. Is that a bad reason?", "call": "Fear is a perfectly valid reason to build something - start anyway, and stop performing ambition you do not feel, because the honesty is the part that works.", "how": "nobody started a personal brand because they were happy, May 2026.", "cost": "Two to four hours a week, indefinitely. What you give up is the comfortable story that you are doing this because you are ambitious rather than because you are scared.", "unless": "If the fear is about one specific thing you could fix directly - a savings gap, a visa, a manager - fix that first. A personal brand is a slow hedge, not an emergency exit.", "do": "This week, write the actual reason you want to start, the unflattering version, and keep it somewhere private. You do not have to publish it. You do have to stop lying to yourself about it.", "again": "yes", "note": "Dear reader who has had the ring light in the box for three weeks.", "src": "SUBSTACK: nobody started a personal brand because they were happy, 31 May 2026", "tags": ["personal-brand", "start-something", "visibility", "pre-decision", "imposter"]}, {"id": "S-03", "q": "Should I build something on the side as insurance against being laid off?", "call": "Yes, and be honest that it is a hedge rather than a calling - build something that cannot fire you, and stop calling it passion when it is insurance.", "how": "nobody started a personal brand because they were happy, May 2026 - written after a round of layoffs at her previous company.", "cost": "Evenings and weekends, for a long time. What you give up is the separation between work and rest, and nobody tells you that the side thing has no healthcare and nobody to have lunch with.", "unless": "If you are already close to burnout, adding a second unregulated job is not insurance, it is acceleration. Fix the sleep first, then build.", "do": "This week, write the number of months you could survive if the calendar invite came tomorrow. That number, not the follower count, is what the side thing is for.", "again": "yes", "note": "Dear reader whose friend found out she was laid off because her Slack went grey.", "src": "SUBSTACK: nobody started a personal brand because they were happy, 31 May 2026", "tags": ["side-income", "layoff-risk", "start-something", "deciding-now", "employer-risk", "burnout"]}, {"id": "S-04", "q": "How many followers do I need before this counts as real?", "call": "There is no number - the goalpost moves every time you reach it, so pick a thing to be right about instead of a number to reach.", "how": "How Much Is Enough, April 2026 - the conversation with her sister and her father about what counts as a real creator.", "cost": "Nothing, except giving up the target you have been using to postpone feeling alright about your own work.", "unless": "If you have a concrete commercial goal that genuinely requires scale - a rate card, a sponsor threshold - then the number is real and you should name it precisely rather than vaguely.", "do": "This week, replace your follower goal with one sentence describing what you want to be known for being right about. Check whether your last ten posts would produce it.", "again": "yes", "note": "Dear reader who has moved the goalpost three times this year and not noticed.", "src": "SUBSTACK: How Much Is Enough, 5 Apr 2026", "tags": ["personal-brand", "comparison", "creator", "deciding-now", "imposter"]}, {"id": "S-05", "q": "I send money home every month. How do I factor that into a career decision?", "call": "Put it in the spreadsheet as a fixed cost, not a moral question - the reason these decisions feel impossible is that you have been carrying a number you never wrote down.", "how": "nobody started a personal brand because they were happy, May 2026 - the section on readers sending money home, and what no cost-of-living analysis includes.", "cost": "Nothing to write it down. Everything to keep pretending it is not there. What you give up is the version of the decision where this is invisible.", "unless": "If naming the number would create a conversation at home you are not ready for, write it privately first. The spreadsheet is for you, not for them.", "do": "This week, write the monthly figure down and put it in the same place as your rent. Any offer that does not clear it is not an offer, whatever the headline salary says.", "again": "yes", "note": "Dear reader who has never been able to explain this to a colleague without it sounding like a sob story.", "src": "SUBSTACK: nobody started a personal brand because they were happy, 31 May 2026", "tags": ["salary", "pay-cut", "outside-uk", "india", "deciding-now"]}, {"id": "S-06", "q": "There are twenty-seven jobs on this list. Which ones are actually for me?", "call": "Apply to three, not twenty-seven - pick the ones where you can name why you specifically, and write that sentence before you write the application.", "how": "The jobs section, run in every issue - 15 companies in April, 27 across Europe and India by late May.", "cost": "Roughly two hours per real application. What you give up is the comfort of volume, which feels like effort and produces almost nothing.", "unless": "If you are being made redundant with a deadline, invert this - apply widely and fast, and be selective later when you have leverage again.", "do": "By Friday, pick three from the list and write one sentence each on why you specifically. If you cannot fill the sentence, that one is not on your list.", "again": "yes", "note": "Dear reader who has saved four job lists and applied to none of them.", "src": "SUBSTACK: jobs section, recurring - 14 Apr 2026 and 26 May 2026", "tags": ["job-offer", "career-change", "deciding-now", "remote", "pre-decision"]}, {"id": "S-07", "q": "My job title is basically my identity. What happens to me if I lose it?", "call": "Build one thing with your name on it rather than your employer's, starting now, because the scaffolding you are standing on belongs to someone else's Q3 budget.", "how": "nobody started a personal brand because they were happy, May 2026 - the section on identity having no backup.", "cost": "A year of saying the same thing while it feels repetitive to you and new to everyone else. What you give up is the ease of having your job answer 'so what do you do?' for you.", "unless": "If your field genuinely works on reputation inside a small market, and your pipeline is full, this is a distraction. Do the work and keep the relationships warm instead.", "do": "This week, write the sentence you would use at dinner three months after a layoff. If it is 'I am figuring things out', you have your answer about what to start.", "again": "yes", "note": "Dear reader whose Slack status is the closest thing you have to a personality.", "src": "SUBSTACK: nobody started a personal brand because they were happy, 31 May 2026", "tags": ["layoff-risk", "personal-brand", "stay-or-go", "imposter", "mid-career"]}, {"id": "S-08", "q": "Should I build a system for everything I am learning, or just keep going?", "call": "Build the smallest possible system and stop there - the system that needs maintaining becomes a second job, and the second job is the thing that kills the first one.", "how": "what is a second brain and why you need it, May 2026 - the Context Stack.", "cost": "An hour to set up and about ten minutes a week. What you give up is the pleasant feeling of organising as a substitute for making.", "unless": "If you genuinely cannot find things you wrote three months ago and it is costing you work, spend the weekend on it properly. Otherwise a note app and a weekly ten minutes is the whole answer.", "do": "This week, put everything in one place, not five. Set a ten-minute slot on Sunday to sort it. Do not buy anything.", "again": "not like that", "note": "Dear reader with notes in five apps and confidence in none of them.", "src": "SUBSTACK: what is a second brain and why you need it, 26 May 2026 - VERIFY BODY BEFORE DEMO", "tags": ["start-something", "side-project", "deciding-now", "tech", "creator"]}, {"id": "S-09", "q": "The numbers are small and nothing is happening. Should I stop?", "call": "Do not stop at month six - that is exactly where it stops being embarrassing and starts being a body of work, and almost everyone quits within a fortnight of it.", "how": "How Much Is Enough, April 2026 - on her first year, and the videos so uncomfortable she archived them.", "cost": "Several more months of feeling like nobody is reading. What you give up is the clean exit where you get to say it was not for you.", "unless": "If it has been two years, you dread every session, and nothing has come of it, stopping is a legitimate decision rather than a failure. Say it out loud to one person so it counts.", "do": "This week, decide the number of issues or posts you will finish before you allow yourself to judge it. Write the number down. Twenty is the right answer.", "again": "yes", "note": "Dear reader checking analytics at 1am and calling it a performance review.", "src": "SUBSTACK: How Much Is Enough, 5 Apr 2026", "tags": ["creator", "comparison", "stay-or-go", "deciding-now", "imposter", "burnout"]}, {"id": "S-10", "q": "My friend keeps saying she feels behind. What do I actually send her?", "call": "Send the data and one line about why it made you think of her - the sentence you write is the gift, the link is just the wrapping.", "how": "you were never behind, April 2026, which ends by asking readers to forward it to the friend who keeps texting that she feels behind.", "cost": "One minute. What you give up is nothing, which is why it is strange how rarely anyone does it.", "unless": "If she has not asked and is not ready, wait. A forwarded link at the wrong moment reads as a verdict on how she is living.", "do": "Today, forward it with one sentence: here is the bit that made me think of you. Then tell her you love her on her actual timeline.", "again": "yes", "note": "Dear reader who keeps composing this message and deleting it.", "src": "SUBSTACK: you were never behind, 14 Apr 2026", "tags": ["comparison", "am-i-behind", "no-budget", "deciding-now", "pre-decision"]}, {"id": "SC-01", "q": "I am turning 26 and people my age are becoming VPs and partners. It keeps me up at night.", "call": "You are not behind them, you are on a different fuel - the people making VP at 26 are often running on the kind that burns out by 32, and yours is the slower one that lasts.", "how": "Her own reply to a reader in the comments of you were never behind, 14 April 2026.", "cost": "Nothing in money. What it costs is the reflex - comparison is a trained habit rather than a fact, and untraining it takes a while.", "unless": "If the feeling has a specific cause you could fix - underpaid, under-titled, genuinely stuck in a dead role - then the comparison is information rather than anxiety. Act on it instead of soothing it.", "do": "This week, write the three people you are actually racing and whether you have spoken to any of them in the last year. Then be kind to yourself while the reflex untrains.", "again": "yes", "note": "Dear reader who keeps checking LinkedIn at night and feeling worse afterwards.", "src": "SUBSTACK COMMENT: Aditi's reply to a reader, 14 Apr 2026 - PASTE HER VERBATIM WORDS OVER THIS CALL", "tags": ["comparison", "am-i-behind", "mid-career", "deciding-now", "consulting", "finance"]}, {"id": "SC-02", "q": "I installed the tool and have not used it. Should I invest the time in learning it properly?", "call": "Use it on one real task this week rather than learning it in the abstract - a tool you have not pointed at your own work is just another tab.", "how": "Her AI tools breakdown, March 2026, and the comment thread under it.", "cost": "An afternoon. What you give up is the comfortable feeling of being someone who has installed the thing.", "unless": "If you have three half-learned tools already, learn none of them. Pick the one that touches work you do weekly and delete the rest.", "do": "By Friday, do one real task you would have done anyway with the tool instead. If it does not save you time on that task, stop.", "again": "yes", "note": "Dear reader who installed it a week ago and has not opened it since.", "src": "SUBSTACK COMMENT: AI tools post comment thread, Mar 2026 - VERIFY POST BODY BEFORE DEMO", "tags": ["start-something", "tech", "deciding-now", "side-project", "imposter"]}, {"id": "IG-01", "q": "My LinkedIn has not been touched in two years. Worth rewriting?", "call": "Rewrite the top third and leave the rest — the headline and first two lines are all a recruiter reads, and nothing below them gets a chance until those work.", "how": "My recruiter-ready LinkedIn post, written from my time inside LinkedIn.", "cost": "An hour. You give up the version of your profile that describes your job instead of your value.", "unless": "If you are not looking and not hiring, leave it. A profile rewritten out of anxiety reads like one.", "do": "Rewrite your headline so it says what you do for people, not your job title. Leave the rest until that line is right.", "again": "yes", "note": "For the one who has had the edit screen open twice this month.", "src": "INSTAGRAM: recruiter-ready LinkedIn post", "tags": ["visibility", "job-offer", "career-change", "deciding-now", "tech"]}, {"id": "IG-02", "q": "Which skills should I actually learn to stay employable?", "call": "Learn the two things a machine is worst at — judgement under uncertainty, and getting other people to agree — and stop collecting tools.", "how": "My post on the only skills I would ask my younger sister to learn.", "cost": "Months, not weekends. You give up the satisfying feeling of finishing a course.", "unless": "If your role is being automated on a known timeline, learn the specific replacement first. Urgency changes the order.", "do": "Pick one and practise it on work you already have to do. Not a course. A real task.", "again": "yes", "note": "For the one with four half-finished courses and a growing sense of dread.", "src": "INSTAGRAM: 'if you were my younger sister' post", "tags": ["career-change", "start-something", "tech", "deciding-now", "mid-career"]}, {"id": "IG-03", "q": "I am bad at networking. Do I actually have to?", "call": "Stop networking and start being useful to five specific people — the top of any field runs on reciprocity, not on introductions collected at events.", "how": "My post on how the top 1% network.", "cost": "About an hour a month. You give up the idea that this happens at events rather than in your inbox.", "unless": "Job hunting with a deadline? Be direct instead — ask ten people for a specific thing. Slow reciprocity is for when you have time.", "do": "Send one genuinely useful thing to five people with no ask attached. Diary the same slot next month.", "again": "yes", "note": "For the one who has been to three events and come home with nothing.", "src": "INSTAGRAM: network like the top 1% post", "tags": ["no-network", "visibility", "deciding-now", "pre-decision", "non-tech"]}, {"id": "IG-04", "q": "Should I apply to roles in Europe rather than where I am?", "call": "Apply before you move — the hiring is real and remote-friendly, and moving first turns a job search into a countdown.", "how": "My posts on Europe hiring and the new tech roles opening there.", "cost": "Applications take weeks and the timezone gymnastics are real. You give up the certainty of your current market.", "unless": "If you need a visa and have no runway, reverse it — secure the role that sponsors, then move. Do not resign on optimism.", "do": "Apply to three roles that would sponsor or hire remotely. Let the applications tell you whether the market is real for you.", "again": "not like that", "note": "For the one with European job boards open since March.", "src": "INSTAGRAM: Europe is hiring posts", "tags": ["relocate", "job-offer", "career-change", "deciding-now", "tech"]}, {"id": "IG-05", "q": "I turn 30 soon and I have not done what I meant to. What now?", "call": "Write what you actually learned instead of what you meant to achieve — the decade did not fail, the scoring system did.", "how": "My thirtieth birthday post, thirty things I would tell my younger sister.", "cost": "An evening. You give up a plan made at 22 by someone who had not met you yet.", "unless": "If there is one concrete thing you genuinely want and have not started, this is not the moment for reframing. Start it this month.", "do": "Write the five things you know now that you did not at 25. Then one thing for the next year, not the next decade.", "again": "yes", "note": "For the one doing the maths on your own birthday.", "src": "INSTAGRAM: 'I'm 30 today' post", "tags": ["comparison", "am-i-behind", "mid-career", "deciding-now", "stay-or-go", "drifting"]}], "topics": [{"id": "offers", "label": "Offers and moves", "sub": "Take it, leave it, or ask for more", "tags": ["job-offer", "stay-or-go", "negotiate", "salary", "career-change", "relocate", "post-decision", "first-90-days"], "icon": "arrows"}, {"id": "behind", "label": "Feeling behind", "sub": "Comparison, timelines, and the 3am maths", "tags": ["comparison", "am-i-behind", "imposter", "drifting", "mid-career"], "icon": "clock"}, {"id": "seen", "label": "Being seen", "sub": "Posting, profiles, and your employer", "tags": ["visibility", "personal-brand", "employer-risk", "no-network"], "icon": "eye"}, {"id": "building", "label": "Building something", "sub": "Side projects, newsletters, going out alone", "tags": ["start-something", "side-project", "side-income", "creator", "layoff-risk"], "icon": "brick"}, {"id": "money", "label": "Money and worth", "sub": "Pay, cost, and whether it is worth it", "tags": ["salary", "negotiate", "spend-money", "pay-cut", "unpaid", "no-budget", "over-2k", "500-2k", "under-500"], "icon": "coin"}, {"id": "rooms", "label": "Rooms and events", "sub": "Tickets, trips, and unpaid gigs", "tags": ["spend-money", "unpaid", "over-2k", "500-2k", "under-500", "no-network"], "icon": "door"}, {"id": "tired", "label": "Running on empty", "sub": "Burnout, drift, and saying no", "tags": ["burnout", "drifting", "stay-or-go", "unpaid"], "icon": "battery"}, {"id": "elsewhere", "label": "Not in London", "sub": "Doing this from anywhere else", "tags": ["india", "outside-uk", "remote", "relocate", "non-tech"], "icon": "globe"}], "stages": [{"id": "st1", "name": "Working out what I want", "tags": ["pre-decision", "drifting", "imposter", "comparison", "am-i-behind"]}, {"id": "st2", "name": "Getting in the room", "tags": ["no-network", "visibility", "career-change", "job-offer"]}, {"id": "st3", "name": "Deciding", "tags": ["deciding-now", "stay-or-go", "job-offer", "spend-money", "relocate"]}, {"id": "st4", "name": "Asking for more", "tags": ["negotiate", "salary", "pay-cut", "mid-career"]}, {"id": "st5", "name": "Building my own thing", "tags": ["start-something", "side-project", "side-income", "personal-brand", "creator"]}], "lexicon": {"job-offer": ["offer", "offered", "job offer", "role", "position", "accepted", "counteroffer", "interview", "recruiter", "start date", "contract"], "stay-or-go": ["stay or", "should i leave", "quit", "resign", "notice period", "hand in", "move on", "stick it out"], "salary": ["salary", "pay", "paid", "compensation", "package", "raise", "bonus", "equity", "stock", "rsu", "base"], "negotiate": ["negotiate", "negotiating", "negotiation", "ask for more", "counter", "lowball", "push back"], "spend-money": ["ticket", "cost", "price", "worth it", "budget", "spend", "expensive", "afford", "fee", "invoice"], "relocate": ["move to", "moving", "relocate", "relocation", "visa", "sponsor", "abroad", "another country"], "visibility": ["post", "posting", "publish", "linkedin", "instagram", "audience", "followers", "content", "in public"], "personal-brand": ["personal brand", "brand", "creator", "influencer", "positioning", "thought leader"], "start-something": ["start", "launch", "side project", "build something", "founder", "startup", "my own thing", "freelance"], "side-income": ["side income", "second income", "extra money", "freelancing", "monetise", "monetize"], "side-project": ["side project", "weekend project", "nights and weekends", "newsletter", "substack"], "career-change": ["career change", "switch", "pivot", "retrain", "different industry", "new field", "transition"], "comparison": ["everyone else", "my peers", "compare", "comparing", "they are ahead", "classmate", "friend got"], "am-i-behind": ["behind", "late", "too old", "should have", "by now", "wasted", "my age", "turning 2", "turning 3"], "imposter": ["imposter", "not qualified", "not good enough", "fraud", "out of my depth", "fluke"], "burnout": ["burnout", "burnt out", "burned out", "exhausted", "tired all the time", "overwhelmed", "no energy"], "layoff-risk": ["layoff", "laid off", "redundant", "redundancy", "restructure", "cuts", "job security", "pip"], "employer-risk": ["my employer", "my manager", "my boss", "company policy", "get in trouble", "hr", "nda"], "no-network": ["no network", "do not know anyone", "dont know anyone", "no contacts", "cold email", "intro"], "first-90-days": ["first 30", "first thirty", "first 90", "first ninety", "just started", "new job", "onboarding"], "post-decision": ["i took the", "i accepted", "i said yes", "already decided", "i signed", "now what"], "creator": ["creator", "newsletter", "subscribers", "engagement", "reels", "views", "brand deal", "sponsor"], "tech": ["engineer", "developer", "product manager", "startup", "saas", "software", "data", "tech"], "finance": ["finance", "banking", "investment", "analyst", "private equity", "fund"], "consulting": ["consulting", "consultant", "partner track", "client work"], "non-tech": ["nhs", "teacher", "teaching", "law", "legal", "marketing", "charity", "retail", "academia"], "india": ["india", "bangalore", "bengaluru", "mumbai", "delhi", "hyderabad", "chennai", "rupees"], "outside-uk": ["outside the uk", "not in london", "from india", "in the us", "in europe", "overseas"], "london": ["london", "zone 1", "zone 2", "tube"], "remote": ["remote", "work from home", "wfh", "distributed", "anywhere"], "unpaid": ["unpaid", "for free", "for exposure", "no fee", "volunteer"], "pay-cut": ["pay cut", "less money", "lower salary", "take a cut"], "drifting": ["drifting", "stuck", "coasting", "going nowhere", "no direction", "lost", "plateau"], "mid-career": ["five years in", "ten years in", "mid career", "senior", "lead", "manager"]}, "links": {"substack": "https://prettyambitious.substack.com/", "instagram": "https://www.instagram.com/byaditimishra", "club": "https://www.instagram.com/prettyambitiousclub", "linkedin": "", "luma": "", "eventbrite": ""}, "posts": [{"t": "you were never behind", "u": "https://prettyambitious.substack.com/p/you-were-never-behind", "s": "The timeline is fake, and here is the data. Plus the Pace Audit.", "d": "14 Apr 2026", "tags": ["comparison", "am-i-behind", "drifting", "mid-career"]}, {"t": "nobody started a personal brand because they were happy", "u": "https://prettyambitious.substack.com/p/nobody-started-a-personal-brand-because", "s": "On fear, ambition, and the lie we all agreed to tell.", "d": "31 May 2026", "tags": ["personal-brand", "layoff-risk", "side-income", "visibility", "imposter"]}, {"t": "How Much Is Enough?", "u": "https://prettyambitious.substack.com/p/how-much-is-enough", "s": "On moving goalposts, and deciding today was enough.", "d": "5 Apr 2026", "tags": ["creator", "comparison", "imposter", "start-something"]}, {"t": "You Are Your Greatest Love", "u": "https://prettyambitious.substack.com/p/you-are-your-greatest-love", "s": "On being chosen without calculation.", "d": "13 Feb 2026", "tags": ["imposter", "burnout", "am-i-behind"]}], "frameworks": [{"n": "The Pace Audit", "f": "When comparison has you convinced you are behind.", "s": ["Whose timeline am I actually racing? Write the three people, and whether you have spoken to any of them this year.", "What am I optimising for in five years? One sentence, specific enough that a friend would nod.", "What does this week need me to do? One action, in the calendar."], "u": "https://prettyambitious.substack.com/p/you-were-never-behind", "tags": ["comparison", "am-i-behind", "drifting"]}, {"n": "The Fear Rebrand", "f": "When you are calling it ambition and it is actually insurance.", "s": ["Name the real reason you are building it. The unflattering version.", "Work out which of the three it is: the employer, the salary, or the identity.", "Decide whether a hedge is what you want, then build it deliberately rather than guiltily."], "u": "https://prettyambitious.substack.com/p/nobody-started-a-personal-brand-because", "tags": ["personal-brand", "layoff-risk", "side-income"]}, {"n": "Three questions before I post", "f": "When you are not sure whether to publish something.", "s": ["Would I say this to my sister on the phone?", "Is this mine to share, or my employer's?", "Am I hesitating because it is unflattering to me, or to someone else?"], "u": "", "tags": ["visibility", "employer-risk", "personal-brand"]}, {"n": "Keep / maybe / kill", "f": "When you have said yes to too much.", "s": ["List what you are committed to right now.", "Mark each keep, maybe or kill, fast, without justifying.", "Give one kill away to someone who has never been asked."], "u": "", "tags": ["unpaid", "spend-money", "creator", "burnout"]}], "events": [{"n": "Pretty Ambitious Club", "w": "London · in person", "d": "Rolling", "b": "My networking club. Small rooms, real conversations, no lanyards. Applications open on Instagram.", "u": "https://www.instagram.com/prettyambitiousclub", "cta": "See the club"}], "gaps": [{"q": "Should I do an MBA?", "why": "High stakes, asked constantly, nothing published."}, {"q": "How do I negotiate a specific number?", "why": "Clear demand, nothing on record to answer with."}, {"q": "Should I tell my manager I am interviewing?", "why": "Adjacent to the build-in-public rule, never actually answered."}, {"q": "Can you do this in Hindi?", "why": "Asked directly in the inbox. Nothing serves it."}, {"q": "Will you run a workshop?", "why": "You said you should. Nobody has heard back."}], "quizQuick": [{"q": "What is on your mind?", "opts": [{"l": "A job or an offer", "t": ["job-offer", "stay-or-go"]}, {"l": "Money", "t": ["salary", "negotiate"]}, {"l": "Starting something", "t": ["start-something", "side-project"]}, {"l": "Feeling behind", "t": ["comparison", "am-i-behind"]}, {"l": "Being seen", "t": ["visibility", "personal-brand"]}]}, {"q": "Where are you?", "opts": [{"l": "Early in it", "t": ["imposter", "pre-decision"]}, {"l": "A few years in", "t": ["mid-career", "deciding-now"]}, {"l": "Senior or leading", "t": ["mid-career", "negotiate"]}, {"l": "Changing lanes", "t": ["career-change", "relocate"]}]}, {"q": "What would help most this week?", "opts": [{"l": "A decision made", "t": ["deciding-now"]}, {"l": "Something to do", "t": ["start-something"]}, {"l": "Feeling less alone", "t": ["comparison", "imposter", "burnout"]}, {"l": "A way in", "t": ["no-network", "visibility"]}]}], "quizDeep": [{"q": "What is on your mind?", "opts": [{"l": "A job or an offer", "t": ["job-offer", "stay-or-go"]}, {"l": "Money", "t": ["salary", "negotiate"]}, {"l": "Starting something", "t": ["start-something", "side-project"]}, {"l": "Feeling behind", "t": ["comparison", "am-i-behind"]}, {"l": "Being seen", "t": ["visibility", "personal-brand"]}]}, {"q": "Where are you?", "opts": [{"l": "Early in it", "t": ["imposter", "pre-decision"]}, {"l": "A few years in", "t": ["mid-career", "deciding-now"]}, {"l": "Senior or leading", "t": ["mid-career", "negotiate"]}, {"l": "Changing lanes", "t": ["career-change", "relocate"]}]}, {"q": "What would help most this week?", "opts": [{"l": "A decision made", "t": ["deciding-now"]}, {"l": "Something to do", "t": ["start-something"]}, {"l": "Feeling less alone", "t": ["comparison", "imposter", "burnout"]}, {"l": "A way in", "t": ["no-network", "visibility"]}]}, {"q": "What is in the way?", "opts": [{"l": "My employer", "t": ["employer-risk"]}, {"l": "I do not know anyone", "t": ["no-network"]}, {"l": "Money", "t": ["no-budget"]}, {"l": "I am exhausted", "t": ["burnout"]}, {"l": "Nothing in particular", "t": []}]}, {"q": "Where are you based?", "opts": [{"l": "London", "t": ["london"]}, {"l": "Elsewhere in the UK", "t": []}, {"l": "India", "t": ["india", "outside-uk"]}, {"l": "Somewhere else", "t": ["outside-uk"]}, {"l": "Remote", "t": ["remote"]}]}, {"q": "What world are you in?", "opts": [{"l": "Tech", "t": ["tech"]}, {"l": "Finance or consulting", "t": ["finance", "consulting"]}, {"l": "Creator or media", "t": ["creator"]}, {"l": "Something else", "t": ["non-tech"]}]}]};
+var C=DATA.corpus, TOPICS=DATA.topics, STAGES=DATA.stages, LEX=DATA.lexicon,
+    LINKS=DATA.links, POSTS=DATA.posts, FW=DATA.frameworks, EVENTS=DATA.events,
+    GAPS=DATA.gaps, QQ=DATA.quizQuick, QD=DATA.quizDeep;
 
-var MATCH_FLOOR = 2;
-var DECISION_WEIGHT = 2;
-/* A match also has to agree on the KIND of decision. Without that we do not
-   know what someone is actually asking, so we say so instead of guessing. */
-var NEEDS_DECISION_TAG = true;
-var DECISION_TAGS = ["job-offer","stay-or-go","spend-money","visibility","relocate","start-something",
-  "negotiate","post-decision","personal-brand","side-income","side-project","career-change","salary","comparison"];
+var FLOOR=2, DW=2, NEEDS_KIND=true;
+var KIND=["job-offer","stay-or-go","spend-money","visibility","relocate","start-something",
+ "negotiate","post-decision","personal-brand","side-income","side-project","career-change","salary","comparison"];
 
-var INTAKE = [
- {q:"What are you deciding?", opts:[
-   {l:"Whether to take a job or an offer", t:["job-offer"]},
-   {l:"Whether to stay or go", t:["stay-or-go"]},
-   {l:"Whether to spend money on something", t:["spend-money"]},
-   {l:"Whether to put myself out there publicly", t:["visibility","personal-brand"]},
-   {l:"Whether to start something of my own", t:["start-something","side-project"]},
-   {l:"Whether I am behind and should change course", t:["comparison","am-i-behind"]},
-   {l:"Whether to move somewhere", t:["relocate"]},
-   {l:"What to do now that I have decided", t:["post-decision","first-90-days"]},
-   {l:"Something else \u2014 it is not in this list", t:[]}]},
- {q:"Where are you in it?", opts:[
-   {l:"Thinking about it", t:["pre-decision"]},
-   {l:"Deciding now", t:["deciding-now"]},
-   {l:"Already committed", t:["already-committed"]},
-   {l:"Just started", t:["first-90-days"]}]},
- {q:"What is in the way?", opts:[
-   {l:"My employer might see it", t:["employer-risk"]},
-   {l:"I do not know anyone", t:["no-network"]},
-   {l:"Money", t:["no-budget"]},
-   {l:"I do not feel qualified", t:["imposter"]},
-   {l:"I am running on empty", t:["burnout"]},
-   {l:"Nothing in particular", t:[]}]},
- {q:"What can you spend on this?", opts:[
-   {l:"Nothing", t:["no-budget"]},
-   {l:"Under \u00a3500", t:["under-500"]},
-   {l:"\u00a3500 to \u00a32,000", t:["500-2k"]},
-   {l:"More than \u00a32,000", t:["over-2k"]},
-   {l:"I would take a pay cut", t:["pay-cut"]},
-   {l:"It is unpaid", t:["unpaid"]}]},
- {q:"Where are you?", opts:[
-   {l:"London", t:["london","uk"]},
-   {l:"Elsewhere in the UK", t:["uk"]},
-   {l:"India", t:["india","outside-uk"]},
-   {l:"Somewhere else", t:["outside-uk"]},
-   {l:"Remote, anywhere", t:["remote"]}]},
- {q:"What world are you in?", opts:[
-   {l:"Tech", t:["tech"]},
-   {l:"Finance or consulting", t:["finance","consulting"]},
-   {l:"Creator or media", t:["creator"]},
-   {l:"Something else", t:["non-tech"]}]}
+var NAV=[
+ {id:"",label:"Home"},{id:"ask",label:"Ask me"},{id:"read",label:"Show me"},
+ {id:"answers",label:"Answers"},{id:"map",label:"Career map"},{id:"club",label:"The Club"},
+ {id:"writing",label:"Writing"},{id:"desk",label:"My desk"}
 ];
 
-var MAPPER = [
- {q:"How far out are you thinking?", opts:[
-   {l:"This month", t:["deciding-now"]},
-   {l:"This year", t:["mid-career","career-change"]},
-   {l:"The next five years", t:["am-i-behind","comparison","mid-career"]}]},
- {q:"What would change things most?", opts:[
-   {l:"A different job", t:["job-offer","career-change","stay-or-go"]},
-   {l:"More money", t:["salary","negotiate","pay-cut"]},
-   {l:"Something of my own", t:["start-something","side-project","side-income"]},
-   {l:"Being known for something", t:["visibility","personal-brand"]},
-   {l:"Feeling less behind", t:["comparison","am-i-behind","imposter"]}]},
- {q:"What is true right now?", opts:[
-   {l:"I am comfortable and restless", t:["drifting","stay-or-go"]},
-   {l:"I am worried about my job", t:["layoff-risk"]},
-   {l:"I am exhausted", t:["burnout"]},
-   {l:"I am ready to move", t:["relocate","career-change"]}]}
-];
-
-/* ---------------- storage ---------------- */
-function load(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
-function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-function getProfile(){return load("fr_profile",null)}
-function daysSince(ts){return Math.floor((Date.now()-ts)/86400000)}
-function logRequest(obj){
-  var q=load("fr_requests",[]);
-  q.push(Object.assign({at:Date.now(),rid:"r"+Date.now()+Math.floor(Math.random()*99)},obj));
-  save("fr_requests",q.slice(-400));
-}
-function markSeen(id){var s=load("fr_seen",{});if(!s[id])s[id]=Date.now();save("fr_seen",s);return s[id]}
-
-/* ---------------- theme ---------------- */
-function currentTheme(){
-  var t=load("fr_theme",null);
-  if(t) return t;
-  return (window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";
-}
-function applyTheme(t){
-  document.documentElement.setAttribute("data-theme",t);
-  var b=document.getElementById("themebtn");
-  if(b) b.textContent = t==="dark" ? "Switch to light" : "Switch to dark";
-}
-function toggleTheme(){var t=currentTheme()==="dark"?"light":"dark";save("fr_theme",t);applyTheme(t)}
-
-/* ---------------- matching ---------------- */
-function score(row,tags){
-  var s=0;
-  for(var i=0;i<tags.length;i++)
-    if(row.tags.indexOf(tags[i])>-1) s+=(DECISION_TAGS.indexOf(tags[i])>-1?DECISION_WEIGHT:1);
-  return s;
-}
-function rank(tags){
-  return CORPUS.map(function(r){return {row:r,s:score(r,tags)}})
-    .filter(function(x){return x.s>0}).sort(function(a,b){return b.s-a.s});
-}
-function sharesDecisionTag(row,tags){
-  for(var i=0;i<tags.length;i++)
-    if(DECISION_TAGS.indexOf(tags[i])>-1 && row.tags.indexOf(tags[i])>-1) return true;
-  return false;
-}
-function confident(ranked,tags){
-  if(!ranked.length) return false;
-  if(ranked[0].s < MATCH_FLOOR) return false;
-  if(NEEDS_DECISION_TAG && !sharesDecisionTag(ranked[0].row,tags)) return false;
-  return true;
-}
-function byId(id){for(var i=0;i<CORPUS.length;i++)if(CORPUS[i].id===id)return CORPUS[i];return null}
+/* ---------- helpers ---------- */
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){
   return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function pretty(t){return String(t).replace(/-/g," ")}
+function ld(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function logReq(o){var q=ld("pa_req",[]);q.push(Object.assign({at:Date.now()},o));sv("pa_req",q.slice(-400))}
+function byId(id){for(var i=0;i<C.length;i++)if(C[i].id===id)return C[i];return null}
+function score(r,t){var s=0;for(var i=0;i<t.length;i++)
+  if(r.tags.indexOf(t[i])>-1)s+=(KIND.indexOf(t[i])>-1?DW:1);return s}
+function rank(t){return C.map(function(r){return{row:r,s:score(r,t)}})
+  .filter(function(x){return x.s>0}).sort(function(a,b){return b.s-a.s})}
+function kindMatch(r,t){for(var i=0;i<t.length;i++)
+  if(KIND.indexOf(t[i])>-1&&r.tags.indexOf(t[i])>-1)return true;return false}
+function sure(rk,t){return rk.length&&rk[0].s>=FLOOR&&(!NEEDS_KIND||kindMatch(rk[0].row,t))}
+function byTags(tags){return C.filter(function(r){
+  return tags.some(function(t){return r.tags.indexOf(t)>-1})})}
 
-/* ---------------- reading text: themes from words ---------------- */
-function detectThemes(text){
-  var low=(" "+text+" ").toLowerCase().replace(/\s+/g," ");
-  var out=[];
-  for(var tag in LEXICON){
-    var words=LEXICON[tag], n=0, seen=[];
-    for(var i=0;i<words.length;i++){
-      if(low.indexOf(words[i].toLowerCase())>-1){ n++; if(seen.length<3) seen.push(words[i]); }
-    }
-    if(n) out.push({tag:tag,n:n,words:seen});
-  }
-  out.sort(function(a,b){return b.n-a.n});
-  return out;
-}
-
-/* ---------------- verdict ---------------- */
-function postFor(row){
-  var s=(row.source||"").toLowerCase();
-  for(var i=0;i<LINKS.posts.length;i++){
-    var p=LINKS.posts[i];
-    if(s.indexOf(p.title.toLowerCase().slice(0,22))>-1) return p;
-  }
-  return null;
-}
-function verdictHTML(r,asked){
-  var seen=markSeen(r.id), d=daysSince(seen);
-  var back = d>=7 ? '<div class="note"><b>You looked at this '+d+' days ago.</b> Did you do it? '+
-    '<button class="btn-ghost btn-sm" data-did="yes">Yes</button> '+
-    '<button class="btn-ghost btn-sm" data-did="no">Not yet</button></div>' : '';
-  var p=postFor(r);
-  var readit = p ? '<div class="field"><p class="field-label">Read the piece this came from</p>'+
-    '<p><a href="'+esc(p.url)+'" target="_blank" rel="noopener">'+esc(p.title)+'</a> \u2014 '+esc(p.date)+'</p></div>' : '';
-  return back+'<article class="verdict">'+
-    '<div class="verdict-head"><span class="who">Aditi has made this call before</span>'+
-      '<span class="again">Would she do it again? '+esc(r.again)+'</span></div>'+
-    '<div class="verdict-body">'+
-      (asked?'<p class="asked">'+esc(asked)+'</p>':'')+
-      '<p class="call"><mark>'+esc(r.call)+'</mark></p>'+
-      '<div class="field"><p class="field-label">The room this came from</p><p>'+esc(r.room)+'</p></div>'+
-      '<div class="field"><p class="field-label">What it actually costs</p><p>'+esc(r.cost)+'</p></div>'+
-      '<div class="field"><p class="field-label">When she would say the opposite</p><p>'+esc(r.counter)+'</p></div>'+
-      '<div class="step"><p class="field-label">Do this within seven days</p><p>'+esc(r.next_step)+'</p></div>'+
-      readit+
-      (r.dear_reader?'<p class="margin-note">'+esc(r.dear_reader)+'</p>':'')+
-    '</div>'+
-    '<div class="verdict-foot">'+
-      '<button class="btn" data-share="'+esc(r.id)+'">Send this to someone</button>'+
-      '<button class="btn-ghost" data-restart="1">Ask about something else</button></div>'+
-    '<p class="src">Source \u2014 '+esc(r.source)+'</p></article>';
-}
-function missHTML(label,themes){
-  logRequest({label:label||"unspecified",themes:themes||[],matched:null});
-  return '<div class="miss"><h3>Aditi has not ruled on this yet.</h3>'+
-    '<p>We are not going to invent an answer in her voice. This has been logged as a gap and it shows up '+
-    'on her side as something people are asking that she has never answered.</p>'+
-    '<p style="margin-top:14px"><button class="btn" data-restart="1">Try something else</button></p></div>';
-}
-function cardsHTML(rows){
-  if(!rows.length) return '<p class="lede">Nothing on file for this yet.</p>';
-  return '<div class="cards">'+rows.map(function(r){
-    return '<button class="card" data-open="'+esc(r.id)+'"><p class="card-q">'+esc(r.decision)+'</p>'+
-      '<p class="card-a">'+esc(r.call)+'</p><p class="card-meta">'+esc(r.room)+'</p></button>'}).join("")+'</div>';
+/* ---------- icons ---------- */
+function ico(name,size,col){
+  var s=size||30, c=col||"var(--crimson)";
+  var p={
+   arrows:'<path d="M3 9h18M15 4l6 5-6 5M21 19H3M9 14l-6 5 6 5" />',
+   clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>',
+   eye:'<path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/>',
+   brick:'<rect x="3" y="5" width="18" height="5"/><rect x="3" y="14" width="18" height="5"/><path d="M9 5v5M15 14v5"/>',
+   coin:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7v10M9.5 9.6h4a1.9 1.9 0 010 3.8h-3a1.9 1.9 0 000 3.8h4"/>',
+   door:'<path d="M5 21V4a1 1 0 011-1h9a1 1 0 011 1v17M5 21h14M16 12h1.5"/>',
+   battery:'<rect x="2" y="7" width="16" height="10" rx="1.5"/><path d="M21 10v4"/><path d="M5 10v4"/>',
+   globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18"/>',
+   money:'<path d="M3 17V7l4 3 5-6 5 6 4-3v10z"/>',
+   clockS:'<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>',
+   swap:'<path d="M4 8h13M14 4l4 4-4 4M20 16H7M10 12l-4 4 4 4"/>',
+   check:'<path d="M4 13l5 5L20 6"/>',
+   send:'<path d="M22 3L11 14M22 3l-7 19-4-8-8-4z"/>',
+   people:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.4"/><path d="M15.5 14.3A5.3 5.3 0 0121 19.5"/>',
+   spark:'<path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/>',
+   pen:'<path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14.5 5.5l3 3"/>',
+   grid:'<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>'
+  }[name]||'<circle cx="12" cy="12" r="8"/>';
+  return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="'+c+
+    '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+p+'</svg>';
 }
 
-/* ---------------- flows ---------------- */
-var state={step:0,picked:[],flow:INTAKE,mode:"decide",firstIdx:0};
-
-function viewFlow(sec,flow,mode,title){
-  state={step:0,picked:[],flow:flow,mode:mode,firstIdx:0};
-  return '<p class="eyebrow">'+esc(sec.label)+'</p><h1>'+title+'</h1>'+
-    '<p class="lede">'+esc(sec.blurb)+'</p><div id="flow"></div>';
+/* ---------- hero artwork ---------- */
+function heroArt(){
+  return '<svg class="heroart" viewBox="0 0 420 300" role="img" aria-label="A decision with three routes out of it">'+
+   '<defs><marker id="ah" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">'+
+   '<path d="M0 0l7 3.5L0 7z" fill="var(--ink)"/></marker></defs>'+
+   '<rect x="8" y="8" width="404" height="284" fill="var(--sunk)" stroke="var(--rule)"/>'+
+   '<circle cx="86" cy="150" r="30" fill="var(--marker)" stroke="var(--ink)" stroke-width="1.5"/>'+
+   '<text x="86" y="155" text-anchor="middle" font-family="Instrument Serif,Georgia,serif" font-size="17" fill="var(--ink)">you</text>'+
+   '<path d="M118 138C170 96 236 84 300 72" stroke="var(--ink)" stroke-width="1.4" fill="none" marker-end="url(#ah)"/>'+
+   '<path d="M120 150H300" stroke="var(--crimson)" stroke-width="2.4" fill="none" marker-end="url(#ah)"/>'+
+   '<path d="M118 162C170 204 236 216 300 228" stroke="var(--ink)" stroke-width="1.4" fill="none" stroke-dasharray="4 4" marker-end="url(#ah)"/>'+
+   '<rect x="308" y="56" width="96" height="34" fill="var(--card)" stroke="var(--rule)"/>'+
+   '<text x="318" y="77" font-size="13" fill="var(--muted)" font-family="Karla,Arial,sans-serif">stay put</text>'+
+   '<rect x="308" y="133" width="96" height="34" fill="var(--card)" stroke="var(--ink)" stroke-width="1.6"/>'+
+   '<text x="318" y="154" font-size="13" fill="var(--ink)" font-family="Karla,Arial,sans-serif">my call</text>'+
+   '<rect x="308" y="211" width="96" height="34" fill="var(--card)" stroke="var(--rule)"/>'+
+   '<text x="318" y="232" font-size="13" fill="var(--muted)" font-family="Karla,Arial,sans-serif">wait a year</text>'+
+   '<text x="150" y="141" font-size="12" fill="var(--crimson)" font-family="Karla,Arial,sans-serif">what I\u2019d do</text>'+
+   '</svg>';
 }
+
+/* ---------- career map ---------- */
+function mapArt(active){
+  var w=1180,x0=90,gap=(w-180)/(STAGES.length-1),y=104,out="";
+  out+='<svg viewBox="0 0 '+w+' 200" role="img" aria-label="Career stages, from working out what you want to building your own thing">';
+  out+='<path d="M'+x0+' '+y+'H'+(x0+gap*(STAGES.length-1))+'" stroke="var(--rule)" stroke-width="2"/>';
+  STAGES.forEach(function(s,i){
+    var x=x0+gap*i, on=(active===s.id), n=byTags(s.tags).length;
+    out+='<g class="stagebtn" data-stage="'+s.id+'" role="button" tabindex="0">';
+    out+='<circle cx="'+x+'" cy="'+y+'" r="19" fill="'+(on?"var(--marker)":"var(--card)")+
+         '" stroke="'+(on?"var(--ink)":"var(--rule)")+'" stroke-width="'+(on?2:1.5)+'"/>';
+    out+='<text x="'+x+'" y="'+(y+5)+'" text-anchor="middle" font-size="14" fill="var(--ink)" '+
+         'font-family="Instrument Serif,Georgia,serif">'+(i+1)+'</text>';
+    var words=s.name.split(" "), line1=words.slice(0,2).join(" "), line2=words.slice(2).join(" ");
+    out+='<text x="'+x+'" y="'+(y+44)+'" text-anchor="middle" font-size="13.5" fill="var(--ink)" '+
+         'font-family="Karla,Arial,sans-serif">'+esc(line1)+'</text>';
+    if(line2) out+='<text x="'+x+'" y="'+(y+61)+'" text-anchor="middle" font-size="13.5" fill="var(--ink)" '+
+         'font-family="Karla,Arial,sans-serif">'+esc(line2)+'</text>';
+    out+='<text x="'+x+'" y="'+(y-31)+'" text-anchor="middle" font-size="12" fill="var(--muted)" '+
+         'font-family="Karla,Arial,sans-serif">'+n+' answers</text>';
+    out+='</g>';
+  });
+  return out+'</svg>';
+}
+
+/* ---------- donut ---------- */
+function donut(a,b,la,lb){
+  var tot=a+b||1, frac=a/tot, r=52, cx=70, cy=78, circ=2*Math.PI*r;
+  return '<svg viewBox="0 0 300 156" role="img" aria-label="'+esc(la)+' '+a+', '+esc(lb)+' '+b+'">'+
+   '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="var(--rule)" stroke-width="17"/>'+
+   '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="var(--mint)" stroke-width="17" '+
+   'stroke-dasharray="'+(circ*frac).toFixed(1)+' '+circ.toFixed(1)+'" transform="rotate(-90 '+cx+' '+cy+')"/>'+
+   '<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" font-size="27" fill="var(--ink)" '+
+   'font-family="Instrument Serif,Georgia,serif">'+Math.round(frac*100)+'%</text>'+
+   '<text x="'+cx+'" y="'+(cy+23)+'" text-anchor="middle" font-size="11" fill="var(--muted)" '+
+   'font-family="Karla,Arial,sans-serif">answered</text>'+
+   '<rect x="150" y="56" width="11" height="11" fill="var(--mint)"/>'+
+   '<text x="168" y="66" font-size="12.5" fill="var(--ink)" font-family="Karla,Arial,sans-serif">'+esc(la)+' \u00b7 '+a+'</text>'+
+   '<rect x="150" y="82" width="11" height="11" fill="var(--rule)"/>'+
+   '<text x="168" y="92" font-size="12.5" fill="var(--ink)" font-family="Karla,Arial,sans-serif">'+esc(lb)+' \u00b7 '+b+'</text>'+
+   '</svg>';
+}
+function spark(vals){
+  if(!vals.length) vals=[0];
+  var w=300,h=70,max=Math.max.apply(null,vals)||1,step=vals.length>1?w/(vals.length-1):w;
+  var pts=vals.map(function(v,i){return (i*step).toFixed(1)+","+(h-(v/max)*(h-12)).toFixed(1)}).join(" ");
+  return '<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Questions per day">'+
+    '<polyline points="'+pts+'" fill="none" stroke="var(--crimson)" stroke-width="2"/>'+
+    vals.map(function(v,i){return '<circle cx="'+(i*step).toFixed(1)+'" cy="'+
+      (h-(v/max)*(h-12)).toFixed(1)+'" r="2.6" fill="var(--crimson)"/>'}).join("")+'</svg>';
+}
+
+/* ---------- the answer ---------- */
+function answerHTML(r,asked){
+  var p=null;
+  for(var i=0;i<POSTS.length;i++)
+    if((r.src||"").toLowerCase().indexOf(POSTS[i].t.toLowerCase().slice(0,20))>-1) p=POSTS[i];
+  return '<article class="answer">'+
+   '<div class="ahead"><div class="avatar">A</div><div class="nm"><b>Aditi</b>'+
+     '<span>I have been asked this before</span></div></div>'+
+   '<div class="abody">'+
+     (asked?'<p class="asked">'+esc(asked)+'</p>':'')+
+     '<p class="call"><mark>'+esc(r.call)+'</mark></p>'+
+     '<div class="facts">'+
+       '<div class="fact"><div class="ft">'+ico("money",16)+'What it will cost you</div><p>'+esc(r.cost)+'</p></div>'+
+       '<div class="fact"><div class="ft">'+ico("swap",16)+'When I\u2019d tell you the opposite</div><p>'+esc(r.unless)+'</p></div>'+
+     '</div>'+
+     '<div class="doit"><div class="ft">'+ico("check",16,"var(--ink)")+'<b>Do this, this week</b></div><p>'+esc(r.do)+'</p></div>'+
+     '<details class="more"><summary>Why I say this</summary><div class="inner">'+
+       '<p style="margin:0 0 8px">'+esc(r.how)+'</p>'+
+       '<p style="margin:0 0 8px">Would I do it again? <b>'+esc(r.again)+'</b></p>'+
+       (p?'<p style="margin:0"><a href="'+esc(p.u)+'" target="_blank" rel="noopener">Read the full piece \u2014 '+esc(p.t)+'</a></p>':'')+
+     '</div></details>'+
+   '</div>'+
+   '<div class="afoot">'+
+     '<button class="btn" data-share="'+esc(r.id)+'">Send this to someone</button>'+
+     '<button class="btn-ghost" data-restart="1">Ask me something else</button>'+
+     '<a class="btn-ghost" href="'+esc(LINKS.substack)+'" target="_blank" rel="noopener">Get this weekly</a>'+
+   '</div></article>';
+}
+function missHTML(label,tags){
+  logReq({label:label||"unspecified",themes:tags||[],matched:null});
+  return '<div class="miss"><h3>I have not answered this one yet.</h3>'+
+   '<p>I would rather tell you that than make something up. It is now on my list \u2014 these are '+
+   'exactly what I write about next.</p>'+
+   '<p class="row" style="margin-top:16px">'+
+     '<a class="btn" href="'+esc(LINKS.substack)+'" target="_blank" rel="noopener">Tell me where to send the answer</a>'+
+     '<a class="btn-ghost" href="#/ask">Try another</a></p></div>';
+}
+function qcards(rows,limit){
+  rows=rows.slice(0,limit||99);
+  if(!rows.length) return '<p class="sub">Nothing here yet.</p>';
+  return '<div class="grid3">'+rows.map(function(r){
+    return '<button class="qcard" data-open="'+esc(r.id)+'"><b>'+esc(r.q)+'</b>'+
+     '<p>'+esc(r.call.length>110?r.call.slice(0,110)+"\u2026":r.call)+'</p>'+
+     '<div class="tagline">'+r.tags.slice(0,3).map(function(t){
+       return '<span class="chip">'+esc(pretty(t))+'</span>'}).join("")+'</div></button>'}).join("")+'</div>';
+}
+
+/* ---------- pages ---------- */
+function pageHome(){
+  var featured=["SC-01","C-01","C-03","IG-01","C-04","S-03"].map(byId).filter(Boolean);
+  return '<div class="wrap">'+
+   '<section class="hero"><div>'+
+     '<p class="eyebrow">Pretty Ambitious</p>'+
+     '<h1>Bring me your <em>decision.</em></h1>'+
+     '<p class="lede">I get asked the same questions every day and I cannot answer everyone. '+
+     'So I wrote down what I would actually do. Tell me what you are weighing up and I will tell you '+
+     'my call, what it costs, and the one thing to do this week.</p>'+
+     '<p class="row"><a class="btn" href="#/ask">Ask me \u2014 six questions</a>'+
+     '<a class="btn-ghost" href="#/read">Or paste the email you are stuck on</a></p>'+
+     '<p class="hero-say">"I would rather say one true thing about a room I was actually in '+
+     'than ten clever things about a room I was not."</p>'+
+   '</div><div>'+heroArt()+'</div></section>'+
+
+   '<h2>What are you dealing with?</h2>'+
+   '<p class="sub">Pick the one that sounds like you.</p>'+
+   '<div class="tiles">'+TOPICS.map(function(t){
+     return '<button class="tile" data-topic="'+t.id+'">'+ico(t.icon,28)+
+       '<b>'+esc(t.label)+'</b><span>'+esc(t.sub)+'</span>'+
+       '<i>'+byTags(t.tags).length+' answers</i></button>'}).join("")+'</div>'+
+
+   '<h2>Where are you right now?</h2>'+
+   '<p class="sub">Tap a stage to see what I would do there.</p>'+
+   '<div class="mapwrap">'+mapArt(null)+'</div>'+
+
+   '<h2>The ones people come back to</h2>'+
+   '<p class="sub">Real questions, my actual answers.</p>'+qcards(featured,6)+
+
+   '<h2>Come and meet people in real life</h2>'+clubBlock()+
+
+   '<h2>If you would rather read</h2>'+
+   POSTS.slice(0,3).map(function(p){
+     return '<a class="post" href="'+esc(p.u)+'" target="_blank" rel="noopener"><b>'+esc(p.t)+'</b>'+
+       '<span>'+esc(p.s)+' \u00b7 '+esc(p.d)+'</span></a>'}).join("")+
+   '<p class="row" style="margin-top:22px"><a class="btn-ghost" href="#/writing">Everything I write</a></p>'+
+  '</div>';
+}
+
+function clubBlock(){
+  var e=EVENTS[0];
+  return '<div class="club"><div class="clubtext">'+
+   '<p class="eyebrow">Pretty Ambitious Club</p>'+
+   '<h3 style="font-size:28px">The room, not the feed.</h3>'+
+   '<p class="sub" style="margin-bottom:18px">'+esc(e?e.b:"")+'</p>'+
+   '<p class="row"><a class="btn" href="'+esc(LINKS.club)+'" target="_blank" rel="noopener">See the Club</a>'+
+   '<a class="btn-ghost" href="#/club">What happens there</a></p></div>'+
+   '<div class="clubart">'+
+     '<svg viewBox="0 0 260 200" role="img" aria-label="People around a table">'+
+     '<circle cx="130" cy="104" r="52" fill="none" stroke="var(--rule)" stroke-width="1.5"/>'+
+     [0,1,2,3,4,5].map(function(i){
+       var a=(i/6)*Math.PI*2-Math.PI/2, x=130+Math.cos(a)*78, y=104+Math.sin(a)*78;
+       return '<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="13" fill="'+
+         (i===0?"var(--marker)":"var(--card)")+'" stroke="var(--ink)" stroke-width="1.4"/>'}).join("")+
+     '<text x="130" y="110" text-anchor="middle" font-size="16" fill="var(--muted)" '+
+     'font-family="Instrument Serif,Georgia,serif">12 seats</text></svg>'+
+   '</div></div>';
+}
+
+function pageClub(){
+  return '<div class="wrap"><p class="eyebrow">Pretty Ambitious Club</p>'+
+   '<h1>Small rooms. <em>Real conversations.</em></h1>'+
+   '<p class="lede">The internet is good at reach and bad at rooms. The Club is the other way round \u2014 '+
+   'a handful of people, in person, actually talking about what they are deciding.</p>'+
+   '<div class="grid3" style="margin-bottom:26px">'+
+     '<div class="fact"><div class="ft">'+ico("people",16)+'Who comes</div>'+
+       '<p>People a few years in, deciding something. No panels, no pitches.</p></div>'+
+     '<div class="fact"><div class="ft">'+ico("door",16)+'How to get in</div>'+
+       '<p>Apply through the Club\u2019s Instagram. I read every one.</p></div>'+
+     '<div class="fact"><div class="ft">'+ico("spark",16)+'What you leave with</div>'+
+       '<p>Two or three people worth staying in touch with. That is the whole point.</p></div>'+
+   '</div>'+
+   EVENTS.map(function(e){
+     return '<div class="evt"><span class="when">'+esc(e.w)+' \u00b7 '+esc(e.d)+'</span><b>'+esc(e.n)+'</b>'+
+       '<p>'+esc(e.b)+'</p><a class="btn" href="'+esc(e.u)+'" target="_blank" rel="noopener">'+esc(e.cta)+'</a></div>'
+   }).join("")+
+   (LINKS.luma||LINKS.eventbrite ? '<p class="row" style="margin-top:14px">'+
+     (LINKS.luma?'<a class="btn-ghost" href="'+esc(LINKS.luma)+'" target="_blank" rel="noopener">All dates on Luma</a>':'')+
+     (LINKS.eventbrite?'<a class="btn-ghost" href="'+esc(LINKS.eventbrite)+'" target="_blank" rel="noopener">Tickets on Eventbrite</a>':'')+
+     '</p>' : '<div class="note">Add your Luma or Eventbrite link in <b>LINKS</b> and the dates appear here automatically.</div>')+
+   '<h2>Before you come, read these</h2>'+
+   qcards(byTags(["no-network","spend-money","visibility"]),3)+
+   '</div>';
+}
+
+function pageAsk(){
+  flow={i:0,picked:[],qs:INTAKE,mode:"ask",first:0};
+  return '<div class="wrap"><p class="eyebrow">Ask me</p>'+
+   '<h1>Tell me what you are <em>weighing up.</em></h1>'+
+   '<p class="lede">Six taps. About a minute. You get my call, what it costs, and one thing to do this week.</p>'+
+   '<div id="flow"></div></div>';
+}
+function pageAnswers(){
+  var ts=ld("pa_topic",null);
+  var rows=ts?byTags((TOPICS.filter(function(t){return t.id===ts})[0]||{tags:[]}).tags):C;
+  return '<div class="wrap"><p class="eyebrow">Answers</p>'+
+   '<h1>Everything I have <em>answered.</em></h1>'+
+   '<p class="lede">'+C.length+' questions people actually brought me. Filter, or just browse.</p>'+
+   '<div class="row" id="filters" style="margin-bottom:22px">'+
+     '<button class="filter'+(ts?"":" on")+'" data-topic="all">All</button>'+
+     TOPICS.map(function(t){return '<button class="filter'+(ts===t.id?" on":"")+'" data-topic="'+
+       t.id+'">'+esc(t.label)+'</button>'}).join("")+'</div>'+
+   '<div id="list">'+qcards(rows)+'</div></div>';
+}
+function pageMap(){
+  var st=ld("pa_stage",null);
+  var stage=STAGES.filter(function(s){return s.id===st})[0];
+  return '<div class="wrap"><p class="eyebrow">Career map</p>'+
+   '<h1>Where you are, and <em>what I\u2019d do next.</em></h1>'+
+   '<p class="lede">Most people move through these five. Tap the one you are in.</p>'+
+   '<div class="mapwrap">'+mapArt(st)+'</div>'+
+   (stage?('<h2>'+esc(stage.name)+'</h2><p class="sub">'+byTags(stage.tags).length+
+     ' answers for this stage.</p>'+qcards(byTags(stage.tags),9)+
+     '<h2>A method that helps here</h2>'+fwHTML(stage.tags))
+    :'<p class="note">Pick a stage above and I will show you what I would do there.</p>')+
+   '</div>';
+}
+function fwHTML(tags){
+  var f=FW.filter(function(x){return x.tags.some(function(t){return tags.indexOf(t)>-1})})[0]||FW[0];
+  return '<div class="plan"><h3>'+esc(f.n)+'</h3><p class="why">'+esc(f.f)+'</p><ol>'+
+    f.s.map(function(s){return '<li>'+esc(s)+'</li>'}).join("")+'</ol>'+
+    (f.u?'<p style="margin-top:12px"><a href="'+esc(f.u)+'" target="_blank" rel="noopener">Where this came from</a></p>':'')+
+    '</div>';
+}
+function pageWriting(){
+  return '<div class="wrap"><p class="eyebrow">Writing</p>'+
+   '<h1>Where I actually <em>work this out.</em></h1>'+
+   '<p class="lede">Twice a week, plus the jobs list. Everything on this site started as one of these.</p>'+
+   '<div class="social">'+
+     '<a class="soc" href="'+esc(LINKS.substack)+'" target="_blank" rel="noopener">'+ico("pen",26)+
+       '<b>The newsletter</b><span>Tuesdays and Sundays. Careers, money, and jobs worth applying to.</span></a>'+
+     '<a class="soc" href="'+esc(LINKS.instagram)+'" target="_blank" rel="noopener">'+ico("spark",26)+
+       '<b>Instagram</b><span>The short version. Careers, AI, salary, the rooms I am in.</span></a>'+
+     '<a class="soc" href="'+esc(LINKS.club)+'" target="_blank" rel="noopener">'+ico("people",26)+
+       '<b>The Club</b><span>In person. Small rooms, real conversations.</span></a>'+
+   '</div>'+
+   (LINKS.linkedin?'<p class="row" style="margin-top:14px"><a class="btn-ghost" href="'+esc(LINKS.linkedin)+
+     '" target="_blank" rel="noopener">LinkedIn</a></p>':
+     '<div class="note">Paste your LinkedIn URL into <b>LINKS.linkedin</b> and a button appears here.</div>')+
+   '<h2>Recent pieces</h2>'+
+   POSTS.map(function(p){return '<a class="post" href="'+esc(p.u)+'" target="_blank" rel="noopener">'+
+     '<b>'+esc(p.t)+'</b><span>'+esc(p.s)+' \u00b7 '+esc(p.d)+'</span></a>'}).join("")+
+   '<h2>My methods</h2><div class="grid2">'+FW.map(function(f){
+     return '<div class="plan"><h3>'+esc(f.n)+'</h3><p class="why">'+esc(f.f)+'</p><ol>'+
+       f.s.map(function(s){return '<li>'+esc(s)+'</li>'}).join("")+'</ol></div>'}).join("")+'</div>'+
+   '</div>';
+}
+function pageRead(){
+  return '<div class="wrap"><p class="eyebrow">Show me</p>'+
+   '<h1>Paste it. I will tell you <em>what it is really about.</em></h1>'+
+   '<p class="lede">The offer email, the message you keep rereading, the contract. It is read here on '+
+   'your device \u2014 nothing is uploaded anywhere.</p>'+
+   '<div class="grid2"><div>'+
+     '<div class="drop" id="drop">'+ico("send",30)+'<p style="margin:10px 0 4px"><b>Drop a file here</b></p>'+
+     '<p class="sub" style="margin:0 0 14px">Emails, documents, screenshots, PDFs</p>'+
+     '<button class="btn-ghost" id="pick">Choose a file</button>'+
+     '<input type="file" id="fileinput" multiple hidden></div>'+
+     '<div id="filelist"></div></div>'+
+   '<div><textarea id="paste" placeholder="Or paste the text here\u2026"></textarea>'+
+     '<p class="row" style="margin-top:12px"><button class="btn" id="readit">Read it</button></p></div></div>'+
+   '<div id="out"></div></div>';
+}
+function pageCall(id){
+  var r=byId(id);
+  if(!r) return '<div class="wrap"><h1>Not found</h1><p class="lede">That one is not on the site.</p></div>';
+  var rel=rank(r.tags).filter(function(x){return x.row.id!==r.id}).slice(0,3).map(function(x){return x.row});
+  return '<div class="wrap"><p class="eyebrow">You asked</p>'+
+   '<h1 style="font-size:clamp(26px,3vw,38px);max-width:22ch">'+esc(r.q)+'</h1>'+
+   answerHTML(r,"")+
+   '<h2>Related</h2>'+qcards(rel,3)+'</div>';
+}
+
+/* ---------- dashboard ---------- */
+function planFor(topic,count){
+  var t=topic.replace(/-/g," ");
+  return {
+   hook:"The thing nobody tells you about "+t+".",
+   fmt:["Reel, 45s","Carousel, 6 slides","Newsletter section"],
+   steps:[
+    "Open with the message. Read out the actual question someone sent \u2014 it is better than any hook you write.",
+    "Say your call in one sentence, in the first ten seconds. No build-up.",
+    "Give the cost honestly. This is the part that converts: money, weeks, and what they give up.",
+    "Name when you would say the opposite. It is why people believe the rest.",
+    "End with one thing to do this week, with a day attached.",
+    "CTA: send them here, and ask them to forward it to the person it is really about."
+   ],
+   where:count>3?"Reel first, then the newsletter on Tuesday":"Newsletter section, test the demand before filming"
+  };
+}
+function pageDesk(){
+  var reqs=ld("pa_req",[]);
+  var ans=reqs.filter(function(r){return r.matched}).length;
+  var un=reqs.length-ans;
+  var ev=reqs.filter(function(r){return r.ev}).length;
+  var tc={};reqs.forEach(function(r){(r.themes||[]).forEach(function(t){tc[t]=(tc[t]||0)+1})});
+  var themes=Object.keys(tc).map(function(t){return{t:t,n:tc[t]}})
+    .sort(function(a,b){return b.n-a.n}).slice(0,8);
+  var max=themes.length?themes[0].n:1;
+
+  var days={},today=new Date();
+  for(var i=6;i>=0;i--){var d=new Date(today-i*86400000);days[d.toDateString()]=0}
+  reqs.forEach(function(r){var k=new Date(r.at).toDateString();if(k in days)days[k]++});
+  var series=Object.keys(days).map(function(k){return days[k]});
+
+  var recent=reqs.slice(-7).reverse().map(function(r){
+    var row=r.matched?byId(r.matched):null;
+    return '<div class="qrow"><div class="m"><p>'+esc(r.label||"(no label)")+'</p>'+
+     '<div class="tagline">'+(r.themes||[]).slice(0,4).map(function(t){
+       return '<span class="chip">'+esc(pretty(t))+'</span>'}).join("")+'</div></div>'+
+     '<span class="pill '+(row?"done":"needs")+'">'+(row?"answered without me":"needs me")+'</span></div>'}).join("");
+
+  var plans=(themes.length?themes.slice(0,2).map(function(x){return {q:"More on "+pretty(x.t),why:
+      x.n+" people brought this in. You have answers on file \u2014 this is worth a post.",topic:x.t,n:x.n}}):[])
+    .concat(GAPS.slice(0,2).map(function(g){return {q:g.q,why:g.why,topic:"gap",n:0}}));
+
+  return '<div class="wrap"><p class="eyebrow">My desk \u00b7 private</p>'+
+   '<h1>What people are <em>bringing me.</em></h1>'+
+   '<p class="lede">Thirty seconds instead of two hundred DMs.</p>'+
+   '<div class="kpis">'+
+     '<div class="kpi"><b>'+reqs.length+'</b><span>questions brought</span></div>'+
+     '<div class="kpi"><b>'+ans+'</b><span>answered without me</span></div>'+
+     '<div class="kpi"><b>'+un+'</b><span>only I can answer</span></div>'+
+     '<div class="kpi"><b>'+ev+'</b><span>came with a document</span></div>'+
+     '<div class="kpi"><b>'+C.length+'</b><span>answers on file</span></div></div>'+
+   '<div class="panels">'+
+     '<div class="panel"><h3>How much of my inbox this handles</h3>'+donut(ans,un,"answered","needs me")+'</div>'+
+     '<div class="panel"><h3>Questions per day, last week</h3>'+spark(series)+
+       '<p class="sub" style="margin:10px 0 0">Every point is someone who would otherwise have sent a DM.</p></div>'+
+   '</div>'+
+   '<h2>What people are dealing with</h2>'+
+   (themes.length?'<div class="panel">'+themes.map(function(x){
+      return '<div class="bar"><span class="lab">'+esc(pretty(x.t))+'</span>'+
+        '<span class="track"><i style="width:'+Math.max(4,Math.round(x.n/max*100))+'%"></i></span>'+
+        '<span class="n">'+x.n+'</span></div>'}).join("")+'</div>'
+    :'<p class="sub">Nothing yet. Ask a question on the site and this fills in.</p>')+
+   '<h2>The queue</h2>'+(recent||'<p class="sub">Empty.</p>')+
+   '<h2>What to make next \u2014 with the steps</h2>'+
+   '<p class="sub">Ranked by what people actually asked. Each one is ready to film or write.</p>'+
+   plans.map(function(p){
+     var pl=planFor(p.topic==="gap"?p.q:p.topic,p.n);
+     return '<div class="plan"><h3>'+esc(p.q)+'</h3><p class="why">'+esc(p.why)+'</p>'+
+       '<div class="fmt">'+pl.fmt.map(function(f){return '<span class="chip">'+esc(f)+'</span>'}).join("")+
+       '<span class="chip on">'+esc(pl.where)+'</span></div>'+
+       '<ol>'+pl.steps.map(function(s){return '<li>'+esc(s)+'</li>'}).join("")+'</ol></div>'}).join("")+
+   '<p class="row" style="margin-top:20px"><button class="btn-ghost" data-reset="1">Reset this view</button></p>'+
+   '</div>';
+}
+
+/* ---------- intake ---------- */
+var INTAKE=[
+ {q:"What are you deciding?",opts:[
+   {l:"Whether to take a job or an offer",t:["job-offer"]},
+   {l:"Whether to stay or go",t:["stay-or-go"]},
+   {l:"Whether to spend money on something",t:["spend-money"]},
+   {l:"Whether to put myself out there",t:["visibility","personal-brand"]},
+   {l:"Whether to start something of my own",t:["start-something","side-project"]},
+   {l:"Whether I am behind and should change course",t:["comparison","am-i-behind"]},
+   {l:"Whether to move somewhere",t:["relocate"]},
+   {l:"What to do now that I have decided",t:["post-decision","first-90-days"]},
+   {l:"Something else \u2014 it is not on this list",t:[]}]},
+ {q:"Where are you in it?",opts:[
+   {l:"Thinking about it",t:["pre-decision"]},{l:"Deciding now",t:["deciding-now"]},
+   {l:"Already committed",t:["already-committed"]},{l:"Just started",t:["first-90-days"]}]},
+ {q:"What is in the way?",opts:[
+   {l:"My employer might see it",t:["employer-risk"]},{l:"I do not know anyone",t:["no-network"]},
+   {l:"Money",t:["no-budget"]},{l:"I do not feel qualified",t:["imposter"]},
+   {l:"I am running on empty",t:["burnout"]},{l:"Nothing in particular",t:[]}]},
+ {q:"What can you spend on this?",opts:[
+   {l:"Nothing",t:["no-budget"]},{l:"Under \u00a3500",t:["under-500"]},
+   {l:"\u00a3500 to \u00a32,000",t:["500-2k"]},{l:"More than \u00a32,000",t:["over-2k"]},
+   {l:"I would take a pay cut",t:["pay-cut"]},{l:"It is unpaid",t:["unpaid"]}]},
+ {q:"Where are you?",opts:[
+   {l:"London",t:["london"]},{l:"Elsewhere in the UK",t:[]},
+   {l:"India",t:["india","outside-uk"]},{l:"Somewhere else",t:["outside-uk"]},
+   {l:"Remote, anywhere",t:["remote"]}]},
+ {q:"What world are you in?",opts:[
+   {l:"Tech",t:["tech"]},{l:"Finance or consulting",t:["finance","consulting"]},
+   {l:"Creator or media",t:["creator"]},{l:"Something else",t:["non-tech"]}]}
+];
+var flow={i:0,picked:[],qs:INTAKE,mode:"ask",first:0};
 function renderFlow(){
-  var f=state.flow,i=state.step,el=document.getElementById("flow");
-  if(!el) return;
-  if(i>=f.length){el.innerHTML=resultHTML();return}
-  var q=f[i],pct=Math.round((i/f.length)*100);
-  el.innerHTML='<div class="q-wrap"><div class="progress"><i style="width:'+pct+'%"></i></div>'+
-    '<p class="q-count">Question '+(i+1)+' of '+f.length+'</p><p class="q-text">'+esc(q.q)+'</p>'+
-    '<div class="opts">'+q.opts.map(function(o,n){
-      return '<button class="opt" data-opt="'+n+'">'+esc(o.l)+'</button>'}).join("")+'</div>'+
-    '<div class="q-nav">'+(i>0?'<button class="btn-ghost" data-back="1">Back</button>':'')+'</div></div>';
+  var el=document.getElementById("flow");if(!el)return;
+  if(flow.i>=flow.qs.length){el.innerHTML=flowResult();return}
+  var q=flow.qs[flow.i],pct=Math.round(flow.i/flow.qs.length*100);
+  el.innerHTML='<div class="qwrap"><div class="prog"><i style="width:'+pct+'%"></i></div>'+
+   '<p class="qn">Question '+(flow.i+1)+' of '+flow.qs.length+'</p>'+
+   '<p class="qt">'+esc(q.q)+'</p><div class="opts">'+
+   q.opts.map(function(o,n){return '<button class="opt" data-opt="'+n+'">'+esc(o.l)+'</button>'}).join("")+
+   '</div>'+(flow.i>0?'<p class="row" style="margin-top:18px"><button class="btn-ghost btn-sm" data-back="1">Back</button></p>':'')+
+   '</div>';
 }
-function pickedTags(){var t=[];state.picked.forEach(function(x){t=t.concat(x||[])});return t}
-function firstLabel(){var o=state.flow[0].opts[state.firstIdx];return o?o.l:""}
-
-function resultHTML(){
-  var tags=pickedTags(), label=firstLabel();
-  if(state.mode==="profile") return saveProfile(tags);
-  var ranked=rank(tags);
-  if(!confident(ranked,tags)) return missHTML(label,tags);
-  if(state.mode==="map"){
-    var top=ranked.slice(0,5);
-    logRequest({label:label,themes:tags,matched:top[0].row.id});
-    return '<h2 style="margin-top:0">Five calls that apply to you</h2>'+
-      '<p class="lede">Ranked by how closely they match what you told us.</p>'+
-      cardsHTML(top.map(function(x){return x.row}))+
-      '<p style="margin-top:20px"><button class="btn-ghost" data-restart="1">Start again</button></p>';
+function flowResult(){
+  var tags=[];flow.picked.forEach(function(x){tags=tags.concat(x||[])});
+  var label=(flow.qs[0].opts[flow.first]||{}).l||"";
+  if(flow.mode==="profile"){
+    var u=[];tags.forEach(function(t){if(t&&u.indexOf(t)<0)u.push(t)});
+    sv("pa_profile",{tags:u,at:Date.now()});
+    setTimeout(function(){location.hash="#/answers";render()},10);
+    return '<p class="sub">One moment\u2026</p>';
   }
-  var r=ranked[0].row;
-  logRequest({label:label,themes:tags,matched:r.id});
-  var also=ranked.slice(1,3).map(function(x){return x.row});
-  return verdictHTML(r,label?("You said: "+label.toLowerCase()):"")+
-    (also.length?'<h2>She has made related calls</h2>'+cardsHTML(also):'');
+  var rk=rank(tags);
+  if(!sure(rk,tags)) return missHTML(label,tags);
+  var r=rk[0].row;
+  logReq({label:label,themes:tags,matched:r.id});
+  var rel=rk.slice(1,4).map(function(x){return x.row});
+  return answerHTML(r,label?("You said: "+label.toLowerCase()):"")+
+    (rel.length?'<h2>You might also be asking</h2>'+qcards(rel,3):'');
 }
 
-/* ---------------- profile ---------------- */
-function viewForYou(sec){
-  var p=getProfile();
-  if(!p){
-    return '<p class="eyebrow">'+esc(sec.label)+'</p><h1>Make it <em>yours.</em></h1>'+
-      '<p class="lede">'+esc(sec.blurb)+'</p>'+
-      '<div class="split">'+
-        '<button class="btn" data-quiz="quick">Quick \u2014 about a minute</button>'+
-        '<button class="btn-ghost" data-quiz="deep">In depth \u2014 about three</button></div>'+
-      '<div class="note">Your profile stays in this browser. No account, no password, nothing sent anywhere. '+
-      'Clear it any time from this page.</div><div id="flow"></div>';
-  }
-  var ranked=rank(p.tags).slice(0,6).map(function(x){return x.row});
-  var res=RESOURCES.filter(function(r){return r.tags.some(function(t){return p.tags.indexOf(t)>-1})}).slice(0,4);
-  var posts=LINKS.posts.filter(function(x){return x.tags.some(function(t){return p.tags.indexOf(t)>-1})}).slice(0,3);
-  return '<p class="eyebrow">Your profile</p><h1>Curated <em>for you.</em></h1>'+
-    '<p class="lede">Built from '+p.answers+' answers on '+new Date(p.at).toLocaleDateString()+
-    '. Everything below is filtered to what you told us.</p>'+
-    '<div class="tagrow">'+p.tags.map(function(t){
-      return '<span class="chip hot">'+esc(pretty(t))+'</span>'}).join("")+'</div>'+
-    '<h2>Calls that apply to you</h2>'+cardsHTML(ranked)+
-    (posts.length?'<h2>From her writing</h2>'+posts.map(function(x){
-      return '<div class="res"><a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.title)+'</a>'+
-      '<p>'+esc(x.sub)+' \u2014 '+esc(x.date)+'</p></div>'}).join(""):'')+
-    (res.length?'<h2>What she sends people like you</h2>'+res.map(function(r){
-      return '<div class="res"><a href="'+esc(r.url)+'" target="_blank" rel="noopener">'+esc(r.title)+'</a>'+
-      '<p>'+esc(r.forWhat)+' \u2014 '+esc(r.where)+'</p></div>'}).join(""):'')+
-    '<p style="margin-top:26px"><button class="btn-ghost" data-clearprofile="1">Clear my profile</button></p>';
-}
-function saveProfile(tags){
-  var uniq=[];tags.forEach(function(t){if(t&&uniq.indexOf(t)<0)uniq.push(t)});
-  save("fr_profile",{tags:uniq,at:Date.now(),answers:state.flow.length});
-  setTimeout(function(){location.hash="#/foryou";render()},10);
-  return '<p class="lede">Building your feed\u2026</p>';
-}
-
-/* ---------------- evidence ---------------- */
-var evidence={text:"",files:[]};
-
-function viewEvidence(sec){
-  return '<p class="eyebrow">'+esc(sec.label)+'</p><h1>Paste it. Or <em>drop it in.</em></h1>'+
-    '<p class="lede">'+esc(sec.blurb)+'</p>'+
-    '<div class="drop" id="drop"><p><b>Drop files here</b></p>'+
-      '<p class="card-meta" style="margin-top:4px">Emails, documents, spreadsheets, screenshots, PDFs \u2014 anything</p>'+
-      '<p style="margin-top:12px"><button class="btn-ghost" id="pick">Choose files</button></p>'+
-      '<input type="file" id="fileinput" multiple hidden></div>'+
-    '<div class="filelist" id="filelist"></div>'+
-    '<h2>Or paste the text</h2>'+
-    '<textarea id="paste" placeholder="Paste the offer email, the DM thread, the message you cannot answer\u2026"></textarea>'+
-    '<p style="margin-top:14px"><button class="btn" id="readit">Work out what this is about</button></p>'+
-    '<div id="evout"></div>'+
-    '<div class="note">Files are read in your browser with the FileReader API. Nothing is uploaded, nothing '+
-    'is sent to a server, and no model sees it. Themes come from a word list you can edit in corpus.js.</div>';
-}
-function isTexty(f){
-  var n=(f.name||"").toLowerCase();
-  return /\.(txt|md|csv|tsv|json|eml|html?|log|vtt|srt)$/.test(n) ||
-         (f.type||"").indexOf("text")===0 || (f.type||"").indexOf("json")>-1;
-}
+/* ---------- evidence ---------- */
+var ev={files:[]};
+function isTexty(f){var n=(f.name||"").toLowerCase();
+  return /\.(txt|md|csv|tsv|json|eml|html?|log|vtt|srt)$/.test(n)||
+    (f.type||"").indexOf("text")===0||(f.type||"").indexOf("json")>-1}
 function addFiles(list){
   Array.prototype.slice.call(list||[]).forEach(function(f){
-    var rec={name:f.name,size:f.size,type:f.type||"unknown",text:""};
-    evidence.files.push(rec);
-    if(isTexty(f)&&f.size<600000){
-      var fr=new FileReader();
+    var rec={name:f.name,size:f.size,text:""};ev.files.push(rec);
+    if(isTexty(f)&&f.size<600000){var fr=new FileReader();
       fr.onload=function(){rec.text=String(fr.result||"").slice(0,200000);paintFiles()};
-      fr.onerror=function(){paintFiles()};
-      fr.readAsText(f);
-    }
-  });
-  paintFiles();
+      fr.onerror=paintFiles;fr.readAsText(f)}
+  });paintFiles();
 }
 function paintFiles(){
   var el=document.getElementById("filelist");if(!el)return;
-  if(!evidence.files.length){el.innerHTML="";return}
-  el.innerHTML=evidence.files.map(function(f,i){
-    var st=f.text?("read \u2014 "+f.text.length+" characters"):
-      (isTexty(f)?"reading\u2026":"filename only (binary file)");
+  el.innerHTML=ev.files.map(function(f,i){
+    var st=f.text?("read \u2014 "+f.text.length+" characters"):(isTexty(f)?"reading\u2026":"filename only");
     return '<div class="fileitem"><div>'+esc(f.name)+'<br><span>'+esc(st)+'</span></div>'+
-      '<button class="btn-ghost btn-sm" data-rmfile="'+i+'">Remove</button></div>'}).join("");
+      '<button class="btn-ghost btn-sm" data-rm="'+i+'">Remove</button></div>'}).join("");
 }
-function runEvidence(){
-  var ta=document.getElementById("paste");
-  evidence.text=ta?ta.value:"";
-  var blob=evidence.text+" "+evidence.files.map(function(f){return f.name+" "+f.text}).join(" ");
-  var out=document.getElementById("evout");
+function detect(text){
+  var low=(" "+text+" ").toLowerCase().replace(/\s+/g," "),out=[];
+  for(var tag in LEX){var w=LEX[tag],n=0,seen=[];
+    for(var i=0;i<w.length;i++) if(low.indexOf(w[i].toLowerCase())>-1){n++;if(seen.length<3)seen.push(w[i])}
+    if(n) out.push({tag:tag,n:n,words:seen});}
+  out.sort(function(a,b){return b.n-a.n});return out;
+}
+function runRead(){
+  var ta=document.getElementById("paste"),out=document.getElementById("out");
+  var blob=(ta?ta.value:"")+" "+ev.files.map(function(f){return f.name+" "+f.text}).join(" ");
   if(blob.replace(/\s/g,"").length<25){
-    out.innerHTML='<div class="miss"><h3>Nothing to read yet.</h3>'+
-      '<p>Paste some text or add a file, then try again. A couple of sentences is enough.</p></div>';
-    return;
-  }
-  var themes=detectThemes(blob);
-  if(!themes.length){ out.innerHTML='<h2>What we found</h2>'+missHTML("uploaded evidence",[]); return; }
-  var tags=themes.slice(0,6).map(function(t){return t.tag});
-  var ranked=rank(tags);
-  var chips=themes.slice(0,8).map(function(t){
-    return '<span class="chip'+(t.n>1?' hot':'')+'">'+esc(pretty(t.tag))+' \u00b7 '+t.n+'</span>'}).join("");
-  var words=themes.slice(0,4).map(function(t){return t.words.join(", ")}).filter(Boolean).join("; ");
-  var head='<h2>What this is about</h2><div class="tagrow">'+chips+'</div>'+
-    (words?'<p class="card-meta" style="margin-bottom:18px">Picked up on: '+esc(words)+'</p>':'');
-  if(!confident(ranked,tags)){
-    out.innerHTML=head+missHTML("evidence: "+tags.slice(0,3).join(", "),tags); return;
-  }
-  var r=ranked[0].row;
-  logRequest({label:"Uploaded: "+tags.slice(0,3).map(pretty).join(", "),themes:tags,
-    matched:r.id,evidence:evidence.files.length+(evidence.text?1:0)});
-  out.innerHTML=head+verdictHTML(r,"From what you gave us")+
-    (ranked.length>1?'<h2>Related calls</h2>'+cardsHTML(ranked.slice(1,4).map(function(x){return x.row})):'');
+    out.innerHTML='<div class="miss"><h3>There is nothing to read yet.</h3>'+
+      '<p>Paste a few sentences or add a file, then try again.</p></div>';return}
+  var th=detect(blob);
+  if(!th.length){out.innerHTML=missHTML("pasted text",[]);return}
+  var tags=th.slice(0,6).map(function(x){return x.tag});
+  var rk=rank(tags);
+  var head='<h2>What I think this is about</h2><div class="row" style="margin-bottom:8px">'+
+    th.slice(0,8).map(function(x){return '<span class="chip'+(x.n>1?" on":"")+'">'+
+      esc(pretty(x.tag))+' \u00b7 '+x.n+'</span>'}).join("")+'</div>'+
+    '<p class="sub">Picked up on: '+esc(th.slice(0,4).map(function(x){return x.words.join(", ")})
+      .filter(Boolean).join("; "))+'</p>';
+  if(!sure(rk,tags)){out.innerHTML=head+missHTML("pasted: "+tags.slice(0,3).join(", "),tags);return}
+  var r=rk[0].row;
+  logReq({label:"Pasted: "+tags.slice(0,3).map(pretty).join(", "),themes:tags,matched:r.id,ev:1});
+  out.innerHTML=head+answerHTML(r,"From what you sent me")+
+    (rk.length>1?'<h2>Related</h2>'+qcards(rk.slice(1,4).map(function(x){return x.row}),3):'');
 }
 
-/* ---------------- other views ---------------- */
-function viewList(sec){
-  var rows=CORPUS.filter(function(r){return sec.tags.some(function(t){return r.tags.indexOf(t)>-1})});
-  var set=[];
-  rows.forEach(function(r){r.tags.forEach(function(t){
-    if(set.indexOf(t)<0&&sec.tags.indexOf(t)>-1)set.push(t)})});
-  return '<p class="eyebrow">'+esc(sec.label)+'</p><h1>'+esc(sec.label)+'</h1>'+
-    '<p class="lede">'+esc(sec.blurb)+'</p>'+
-    '<div class="tagrow" id="chips">'+set.map(function(t){
-      return '<button class="tag" data-filter="'+esc(t)+'">'+esc(pretty(t))+'</button>'}).join("")+'</div>'+
-    '<div id="listbody">'+cardsHTML(rows)+'</div>';
-}
-function viewVoices(sec){
-  return '<p class="eyebrow">'+esc(sec.label)+'</p><h1>You are not <em>alone.</em></h1>'+
-    '<p class="lede">'+esc(sec.blurb)+'</p>'+
-    ["SC-01","S-05","S-03","S-09","S-01"].map(function(id){
-      var r=byId(id);if(!r)return"";
-      return '<div class="voice"><p class="voice-said">"'+esc(r.decision)+'"</p>'+
-        '<div class="voice-she"><p class="who">What Aditi said back</p><p>'+esc(r.call)+'</p></div>'+
-        '<p class="card-meta">'+esc(r.room)+'</p></div>'}).join("")+
-    '<div class="note">Every one of these was written by a real person into a comment box or a DM. '+
-    'The replies are hers.</div>';
-}
-function viewFrameworks(sec){
-  return '<p class="eyebrow">'+esc(sec.label)+'</p><h1>Her <em>frameworks.</em></h1>'+
-    '<p class="lede">'+esc(sec.blurb)+'</p>'+FRAMEWORKS.map(function(f){
-      return '<div class="fw"><h3>'+esc(f.name)+'</h3>'+
-        '<p style="margin:0;color:var(--muted)">'+esc(f.forWhat)+'</p><ol>'+
-        f.steps.map(function(s){return '<li>'+esc(s)+'</li>'}).join("")+'</ol>'+
-        '<p class="src">Source \u2014 '+(f.url?'<a href="'+esc(f.url)+'" target="_blank" rel="noopener">'+
-        esc(f.source)+'</a>':esc(f.source))+'</p></div>'}).join("");
-}
-function viewChannels(sec){
-  return '<p class="eyebrow">'+esc(sec.label)+'</p><h1>Where this <em>comes from.</em></h1>'+
-    '<p class="lede">'+esc(sec.blurb)+'</p>'+
-    '<div class="channel"><a href="'+esc(LINKS.substack.url)+'" target="_blank" rel="noopener">'+
-      esc(LINKS.substack.label)+'</a><p>'+esc(LINKS.substack.note)+'</p></div>'+
-    '<div class="channel"><a href="'+esc(LINKS.instagram.url)+'" target="_blank" rel="noopener">'+
-      esc(LINKS.instagram.label)+'</a><p>'+esc(LINKS.instagram.note)+'</p></div>'+
-    '<h2>The pieces these calls came from</h2>'+
-    LINKS.posts.map(function(p){
-      return '<div class="res"><a href="'+esc(p.url)+'" target="_blank" rel="noopener">'+esc(p.title)+'</a>'+
-        '<p>'+esc(p.sub)+' \u2014 '+esc(p.date)+'</p></div>'}).join("")+
-    '<h2>What she sends people</h2>'+RESOURCES.map(function(r){
-      return '<div class="res"><a href="'+esc(r.url)+'" target="_blank" rel="noopener">'+esc(r.title)+'</a>'+
-        '<p>'+esc(r.forWhat)+' \u2014 '+esc(r.where)+'</p></div>'}).join("");
-}
-
-/* ---------------- Aditi's dashboard ---------------- */
-function viewConsole(sec){
-  var reqs=load("fr_requests",[]);
-  var answered=reqs.filter(function(r){return r.matched}).length;
-  var unanswered=reqs.length-answered;
-  var withEvidence=reqs.filter(function(r){return r.evidence}).length;
-
-  var tc={};
-  reqs.forEach(function(r){(r.themes||[]).forEach(function(t){tc[t]=(tc[t]||0)+1})});
-  var themes=Object.keys(tc).map(function(t){return {t:t,n:tc[t]}})
-    .sort(function(a,b){return b.n-a.n}).slice(0,8);
-  var max=themes.length?themes[0].n:1;
-  var bars=themes.length?('<div class="bars">'+themes.map(function(x){
-      return '<div class="bar"><span class="lab">'+esc(pretty(x.t))+'</span>'+
-        '<span class="track"><i style="width:'+Math.max(4,Math.round(x.n/max*100))+'%"></i></span>'+
-        '<span class="n">'+x.n+'</span></div>'}).join("")+'</div>')
-    : '<p class="lede">No themes yet. Bring a decision and this fills in.</p>';
-
-  var counts={};
-  reqs.forEach(function(r){if(r.matched)counts[r.matched]=(counts[r.matched]||0)+1});
-  var top=Object.keys(counts).map(function(id){return {r:byId(id),n:counts[id]}})
-    .filter(function(x){return x.r}).sort(function(a,b){return b.n-a.n}).slice(0,6);
-
-  var recent=reqs.slice(-8).reverse().map(function(r){
-    var row=r.matched?byId(r.matched):null;
-    return '<div class="qrow"><div class="qmain">'+
-      '<p class="qq">'+esc(r.label||"(no label)")+'</p><div>'+
-      (r.themes||[]).slice(0,4).map(function(t){
-        return '<span class="chip">'+esc(pretty(t))+'</span>'}).join("")+'</div>'+
-      (row?'<p class="card-meta">Answered with \u2014 '+esc(row.decision)+'</p>':
-           '<p class="card-meta">Nothing on file could answer this.</p>')+
-      '</div><span class="pill '+(row?'done':'needs')+'">'+
-      (row?'answered without you':'needs you')+'</span></div>'}).join("");
-
-  return '<p class="eyebrow">'+esc(sec.label)+'</p><h1>Your inbox, <em>triaged.</em></h1>'+
-    '<p class="lede">'+esc(sec.blurb)+'</p>'+
-    '<div class="stat">'+
-      '<div><b>'+reqs.length+'</b><span>brought to you</span></div>'+
-      '<div><b>'+answered+'</b><span>answered without you</span></div>'+
-      '<div><b>'+unanswered+'</b><span>only you can answer</span></div>'+
-      '<div><b>'+withEvidence+'</b><span>came with a document</span></div>'+
-      '<div><b>'+CORPUS.length+'</b><span>calls on file</span></div></div>'+
-    '<h2>What people are dealing with</h2>'+bars+
-    '<h2>The queue</h2>'+
-    (recent?'<div class="queue">'+recent+'</div>':
-      '<p class="lede">Empty. Bring a decision and it appears here within seconds.</p>')+
-    (top.length?'<h2>Most asked</h2>'+cardsHTML(top.map(function(x){return x.r})):'')+
-    '<h2>Write these next</h2>'+
-    '<p class="lede">Questions that came in and nothing on file could answer. A content calendar '+
-    'written by the people waiting for it.</p>'+
-    GAPS.map(function(g){return '<div class="gap"><b>'+esc(g.decision)+'</b>'+
-      '<span>'+esc(g.why)+'</span></div>'}).join("")+
-    '<div class="note">Thirty seconds here replaces reading two hundred DMs. Every row is a decision '+
-    'someone brought \u2014 already answered, or waiting for you \u2014 and you can see which at a glance.</div>'+
-    '<p style="margin-top:22px"><button class="btn-ghost" data-resetdash="1">Reset this dashboard</button></p>';
-}
-
-function viewCall(id){
-  var r=byId(id);
-  if(!r) return '<h1>Not found</h1><p class="lede">That call is not on file.</p>';
-  return '<p class="eyebrow">A call from Aditi</p>'+verdictHTML(r,r.decision);
-}
-
-/* ---------------- router ---------------- */
-function route(){
-  var h=(location.hash||"").replace(/^#\/?/,"");
-  if(!h) return {sec:"decide"};
-  var p=h.split("/");
-  if(p[0]==="call") return {call:p[1]};
-  return {sec:p[0]};
-}
+/* ---------- router ---------- */
+function route(){var h=(location.hash||"").replace(/^#\/?/,"");
+  if(!h)return{p:""};var s=h.split("/");
+  if(s[0]==="call")return{call:s[1]};return{p:s[0]}}
 function render(){
-  var rt=route(),main=document.getElementById("main");
-  if(rt.call){main.innerHTML=viewCall(rt.call);paintNav(null);window.scrollTo(0,0);closeNav();return}
-  var sec=null;
-  for(var i=0;i<SECTIONS.length;i++) if(SECTIONS[i].id===rt.sec) sec=SECTIONS[i];
-  if(!sec) sec=SECTIONS[0];
-  var html;
-  switch(sec.kind){
-    case "intake": html=viewFlow(sec,INTAKE,"decide","Bring her your <em>decision.</em>");break;
-    case "mapper": html=viewFlow(sec,MAPPER,"map","Where is this <em>going?</em>");break;
-    case "evidence": html=viewEvidence(sec);break;
-    case "foryou": html=viewForYou(sec);break;
-    case "voices": html=viewVoices(sec);break;
-    case "frameworks": html=viewFrameworks(sec);break;
-    case "channels": html=viewChannels(sec);break;
-    case "console": html=viewConsole(sec);break;
-    default: html=viewList(sec);
+  var rt=route(),m=document.getElementById("main"),id="";
+  if(rt.call){m.innerHTML=pageCall(rt.call)}
+  else{
+    id=rt.p;
+    switch(id){
+      case "":m.innerHTML=pageHome();break;
+      case "ask":m.innerHTML=pageAsk();renderFlowSoon();break;
+      case "read":m.innerHTML=pageRead();wireRead();break;
+      case "answers":m.innerHTML=pageAnswers();break;
+      case "map":m.innerHTML=pageMap();break;
+      case "club":m.innerHTML=pageClub();break;
+      case "writing":m.innerHTML=pageWriting();break;
+      case "desk":m.innerHTML=pageDesk();break;
+      default:m.innerHTML=pageHome();id="";
+    }
   }
-  main.innerHTML=html;
-  if(sec.kind==="intake"||sec.kind==="mapper") renderFlow();
-  if(sec.kind==="evidence") wireEvidence();
-  paintNav(sec.id);paintProfileLine();window.scrollTo(0,0);closeNav();
-}
-function paintNav(id){
-  var links=document.querySelectorAll("#nav a");
+  var links=document.querySelectorAll("#mainnav a");
   for(var i=0;i<links.length;i++){
-    if(links[i].getAttribute("data-sec")===id) links[i].setAttribute("aria-current","page");
+    if(links[i].getAttribute("data-p")===id) links[i].setAttribute("aria-current","page");
     else links[i].removeAttribute("aria-current");
   }
+  document.getElementById("mainnav").classList.remove("open");
+  window.scrollTo(0,0);
 }
-function paintProfileLine(){
-  var p=getProfile(),el=document.getElementById("profileline");
-  if(el) el.innerHTML = p ? "Profile saved on this device."
-    : '<a href="#/foryou">Build a profile</a> for a curated feed.';
-}
-function wireEvidence(){
-  var drop=document.getElementById("drop"),input=document.getElementById("fileinput");
-  if(!drop) return;
-  document.getElementById("pick").addEventListener("click",function(){input.click()});
-  input.addEventListener("change",function(){addFiles(input.files)});
-  ["dragenter","dragover"].forEach(function(ev){
-    drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add("over")})});
-  ["dragleave","drop"].forEach(function(ev){
-    drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.remove("over")})});
-  drop.addEventListener("drop",function(e){
-    if(e.dataTransfer&&e.dataTransfer.files) addFiles(e.dataTransfer.files)});
-  document.getElementById("readit").addEventListener("click",runEvidence);
+function renderFlowSoon(){renderFlow()}
+function wireRead(){
+  var d=document.getElementById("drop"),inp=document.getElementById("fileinput");
+  if(!d)return;
+  document.getElementById("pick").addEventListener("click",function(){inp.click()});
+  inp.addEventListener("change",function(){addFiles(inp.files)});
+  ["dragenter","dragover"].forEach(function(e){d.addEventListener(e,function(x){
+    x.preventDefault();d.classList.add("over")})});
+  ["dragleave","drop"].forEach(function(e){d.addEventListener(e,function(x){
+    x.preventDefault();d.classList.remove("over")})});
+  d.addEventListener("drop",function(x){if(x.dataTransfer&&x.dataTransfer.files)addFiles(x.dataTransfer.files)});
+  document.getElementById("readit").addEventListener("click",runRead);
   paintFiles();
 }
 
-/* ---------------- events ---------------- */
+/* ---------- events ---------- */
 document.addEventListener("click",function(e){
+  var g=e.target.closest("[data-stage]");
+  if(g){sv("pa_stage",g.getAttribute("data-stage"));
+    if(route().p==="map"){render()}else{location.hash="#/map"}return}
   var t=e.target.closest("button, a");
-  if(!t) return;
+  if(!t)return;
+  if(t.tagName==="A"){
+    var h=t.getAttribute("href")||"";
+    if(h.indexOf("#/")===0 && h===(location.hash||"#/")){ e.preventDefault(); render(); return; }
+    if(h==="#/" && (location.hash===""||location.hash==="#/")){ e.preventDefault(); render(); return; }
+  }
   if(t.hasAttribute("data-opt")){
     var n=+t.getAttribute("data-opt");
-    if(state.step===0) state.firstIdx=n;
-    state.picked[state.step]=state.flow[state.step].opts[n].t||[];
-    state.step++;renderFlow();return;
-  }
-  if(t.hasAttribute("data-back")){state.step=Math.max(0,state.step-1);renderFlow();return}
+    if(flow.i===0)flow.first=n;
+    flow.picked[flow.i]=flow.qs[flow.i].opts[n].t||[];flow.i++;renderFlow();return}
+  if(t.hasAttribute("data-back")){flow.i=Math.max(0,flow.i-1);renderFlow();return}
   if(t.hasAttribute("data-restart")){
-    location.hash="#/"+(state.mode==="map"?"map":"decide");render();return}
+    if(location.hash==="#/ask"){render()}else{location.hash="#/ask"}return}
   if(t.hasAttribute("data-open")){location.hash="#/call/"+t.getAttribute("data-open");return}
-  if(t.hasAttribute("data-quiz")){
-    var deep=t.getAttribute("data-quiz")==="deep";
-    state={step:0,picked:[],flow:(deep?QUIZ_DEEP:QUIZ_QUICK),mode:"profile",firstIdx:0};
-    renderFlow();return;
-  }
-  if(t.hasAttribute("data-clearprofile")){
-    try{localStorage.removeItem("fr_profile")}catch(err){}
-    render();toast("Profile cleared.");return}
-  if(t.hasAttribute("data-resetdash")){
-    try{localStorage.removeItem("fr_requests")}catch(err){}
-    render();toast("Dashboard reset.");return}
-  if(t.hasAttribute("data-rmfile")){
-    evidence.files.splice(+t.getAttribute("data-rmfile"),1);paintFiles();return}
-  if(t.hasAttribute("data-did")){
-    save("fr_did",load("fr_did",[]).concat([{at:Date.now(),did:t.getAttribute("data-did")}]));
-    var note=t.closest(".note");
-    if(note) note.innerHTML="<b>Noted.</b> That is the only attribution she has ever had on this.";
-    return;
-  }
+  if(t.hasAttribute("data-topic")){
+    var tp=t.getAttribute("data-topic");
+    sv("pa_topic",tp==="all"?null:tp);
+    if(route().p==="answers"){render()}else{location.hash="#/answers"}return}
+  if(t.hasAttribute("data-rm")){ev.files.splice(+t.getAttribute("data-rm"),1);paintFiles();return}
+  if(t.hasAttribute("data-reset")){try{localStorage.removeItem("pa_req")}catch(x){}render();return}
   if(t.hasAttribute("data-share")){
-    var id=t.getAttribute("data-share"),r=byId(id);
-    var url=location.origin+location.pathname+"#/call/"+id;
-    var text="Here's the bit that made me think of you \u2014 "+r.call+"\n\n"+url;
+    var r=byId(t.getAttribute("data-share"));
+    var url=location.origin+location.pathname+"#/call/"+r.id;
+    var txt="Here\u2019s the bit that made me think of you \u2014 "+r.call+"\n\n"+url;
     try{
-      if(navigator.share){ navigator.share({title:"Front Row",text:text,url:url}).catch(function(){}); }
+      if(navigator.share){navigator.share({title:"Pretty Ambitious",text:txt,url:url}).catch(function(){})}
       else if(navigator.clipboard&&navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text)
-          .then(function(){toast("Copied. Send it to the person who needs it.")})
-          .catch(function(){prompt("Copy this and send it on:",text)});
-      } else { prompt("Copy this and send it on:",text); }
-    }catch(err){ prompt("Copy this and send it on:",text); }
-    return;
-  }
-  if(t.hasAttribute("data-filter")){
-    t.classList.toggle("on");
-    var on=[];
-    document.querySelectorAll("#chips .tag.on").forEach(function(c){
-      on.push(c.getAttribute("data-filter"))});
-    var sec=null,id2=route().sec;
-    for(var i=0;i<SECTIONS.length;i++) if(SECTIONS[i].id===id2) sec=SECTIONS[i];
-    if(!sec||!sec.tags) return;
-    var use=on.length?on:sec.tags;
-    document.getElementById("listbody").innerHTML=cardsHTML(
-      CORPUS.filter(function(r){return use.some(function(tg){return r.tags.indexOf(tg)>-1})}));
-    return;
-  }
+        navigator.clipboard.writeText(txt).then(function(){toast("Copied \u2014 send it on.")})
+          .catch(function(){prompt("Copy this:",txt)})}
+      else{prompt("Copy this:",txt)}
+    }catch(x){prompt("Copy this:",txt)}
+    return}
+});
+document.addEventListener("keydown",function(e){
+  if(e.key==="Enter"||e.key===" "){
+    var g=e.target.closest&&e.target.closest("[data-stage]");
+    if(g){e.preventDefault();sv("pa_stage",g.getAttribute("data-stage"));
+      if(route().p==="map"){render()}else{location.hash="#/map"}}}
 });
 function toast(m){var d=document.createElement("div");d.className="toast";d.textContent=m;
-  document.body.appendChild(d);setTimeout(function(){d.remove()},2600)}
+  document.body.appendChild(d);setTimeout(function(){d.remove()},2500)}
 
-var contents=document.getElementById("contents"),scrim=document.getElementById("scrim"),
-    burger=document.getElementById("burger");
-function openNav(){contents.classList.add("open");scrim.hidden=false;burger.setAttribute("aria-expanded","true")}
-function closeNav(){contents.classList.remove("open");scrim.hidden=true;burger.setAttribute("aria-expanded","false")}
-burger.addEventListener("click",function(){contents.classList.contains("open")?closeNav():openNav()});
-scrim.addEventListener("click",closeNav);
-document.addEventListener("keydown",function(e){if(e.key==="Escape")closeNav()});
-document.getElementById("themebtn").addEventListener("click",toggleTheme);
-document.getElementById("themetop").addEventListener("click",toggleTheme);
+document.getElementById("mainnav").innerHTML=NAV.map(function(n){
+  return '<a href="#/'+n.id+'" data-p="'+n.id+'">'+esc(n.label)+'</a>'}).join("");
+document.getElementById("burger").addEventListener("click",function(){
+  var n=document.getElementById("mainnav");n.classList.toggle("open");
+  this.setAttribute("aria-expanded",n.classList.contains("open")?"true":"false")});
 
-document.getElementById("nav").innerHTML=SECTIONS.map(function(s){
-  return '<li><a href="#/'+s.id+'" data-sec="'+s.id+'">'+esc(s.label)+'</a></li>'}).join("");
-document.getElementById("rowcount").textContent=CORPUS.length;
-
-applyTheme(currentTheme());
 window.addEventListener("hashchange",render);
 render();
 </script>
