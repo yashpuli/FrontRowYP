@@ -1,0 +1,23 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Visitors may ask. Only Aditi may read or change the queue.
+    match /requests/{id} {
+      allow create: if request.resource.data.label is string
+                    && request.resource.data.label.size() > 0
+                    && request.resource.data.label.size() < 500
+                    && request.resource.data.keys().hasOnly(
+                         ['label','themes','matched','typed','ev','at']);
+      allow read, update, delete: if request.auth != null
+                                  && request.auth.uid == 'PASTE_YOUR_UID_HERE';
+    }
+
+    // Answers are public to read. Only Aditi may write them.
+    match /answers/{id} {
+      allow read: if true;
+      allow write: if request.auth != null
+                   && request.auth.uid == 'PASTE_YOUR_UID_HERE';
+    }
+  }
+}

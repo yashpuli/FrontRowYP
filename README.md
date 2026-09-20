@@ -1,7 +1,7 @@
 # Pretty Ambitious — ask me
 
 One file. Open `index.html` in any browser and it works. No build step, no
-dependencies, no API keys, no server.
+dependencies, no API keys, no server. Everything stays in the visitor's browser.
 
 ## Deploy
 
@@ -9,66 +9,73 @@ dependencies, no API keys, no server.
 `netlify.toml`, `README.md` → Commit.
 
 **Netlify** → Add new site → Import an existing project → GitHub → pick the repo →
-build command **empty**, publish directory `.` → Deploy. Rename the site under
-Site configuration before you demo.
-
-Every push redeploys. Editing `index.html` on github.com and hitting Commit is enough.
+build command **empty**, publish directory `.` → Deploy.
 
 ## Editing
 
-Everything the site says lives in one `DATA` object at the top of the `<script>`.
-Search for `var DATA =` and edit the JSON.
+Everything the site says is in one `DATA` object at the top of the `<script>`.
+Search for `var DATA =`.
 
-| Key | What it controls |
+| Key | Controls |
 |---|---|
-| `corpus` | Every answer. `q` question, `call` your answer, `cost`, `unless`, `do`, `how`, `tags` |
-| `topics` | The eight tiles on the home page. Change `tags` to re-theme a tile |
+| `corpus` | Every answer: `q`, `call`, `cost`, `unless`, `do`, `how`, `tags` |
+| `topics` | The eight tiles, and the groups on the Answers page |
 | `stages` | The five points on the career map |
-| `links` | Substack, Instagram, Club, **LinkedIn**, **Luma**, **Eventbrite** |
+| `picks` | Things you recommend. `approved: true` shows the **Aditi approves** badge |
+| `links` | Substack, Instagram, Club, LinkedIn, Luma, Eventbrite |
 | `events` | The Club and any dated events |
-| `posts` | Newsletter pieces shown on Home and Writing |
-| `frameworks` | The Pace Audit and the rest |
-| `gaps` | Questions with no answer yet — these drive "what to make next" |
-| `lexicon` | Words that map to themes when someone pastes or uploads something |
+| `posts` / `frameworks` / `gaps` | Writing page, methods, and the "what to make next" list |
+| `lexicon` | Words that map to themes when someone types, pastes or dictates |
 
-Three links are intentionally blank — `links.linkedin`, `links.luma`,
-`links.eventbrite`. Paste a URL into any of them and the button appears by itself.
-Leave them blank and the site quietly hides them.
+## Dictation
 
-Adding an answer: copy any object in `corpus`, change the text, reuse tag names that
-already appear elsewhere. A tag nothing else uses will never match.
+The mic uses the browser's own speech recognition — works in Chrome, Edge and
+Safari, and **hides itself automatically** in browsers that don't support it
+(Firefox). Wispr Flow is an OS-level tool that types into any focused field, so it
+works in the box without any integration.
 
-## Two settings worth knowing
+## Events
+
+Put your Luma calendar ID in `links.lumaCalendarId` and real dates embed on The Club
+page. An Eventbrite organiser ID in `links.eventbriteOrgId` adds a tickets button.
+Leave them blank and the site quietly hides the section. True two-way sync needs API
+keys and a server — the embeds are the no-backend equivalent.
+
+## Quick vs detailed
+
+Every answer has a **Just the answer / Give me the detail** toggle. Quick shows the
+call plus the one action. Detailed adds the cost, when you'd say the opposite, and
+"Why I say this". The choice is remembered.
+
+## My desk — answering live
+
+Unanswered questions appear under **Waiting on me** as a chat thread. Type a reply,
+press Send, and it becomes a real answer on the site: the next person who asks
+something similar gets it without you. Live answers are matched by wording as well
+as tags, so they work even when the question uses words the lexicon has never seen.
+
+Reset before a demo: open the site, run `localStorage.clear()` in the console, reload.
+
+## Two settings
 
 - `FLOOR` (2) — minimum score before the site answers at all.
-- `NEEDS_KIND` (true) — the match must also agree on the *kind* of decision. This is
-  what makes "I have not answered this one yet" possible. Turn it off and the site
-  answers more often, less honestly.
+- `NEEDS_KIND` (true) — the match must agree on the *kind* of decision. This is what
+  makes "I have not answered this one yet" possible. Answers you wrote yourself skip
+  this check.
 
-## What's where
+## Demo path
 
-- **Home** — the ask, eight topic tiles, the career map, the Club, recent writing
-- **Ask me** — six taps to an answer
-- **Show me** — paste or drop a file; themes detected in-browser, nothing uploaded
-- **Answers** — all 41, filterable
-- **Career map** — five stages, tap one for the answers and a method
-- **The Club** — links to the Club's Instagram, ready for Luma/Eventbrite dates
-- **Writing** — Substack, Instagram, Club, recent pieces, the frameworks
-- **My desk** — the private dashboard
+1. Home — type or dictate a real question, get an answer
+2. Toggle **Just the answer** to show the one-liner mode
+3. Answers — tap a heading, watch it open in place
+4. Ask something you have not answered → "I have not answered this one yet"
+5. **My desk** — that question is waiting. Type a reply. Send.
+6. Go back and ask it again → your own answer comes back
 
-## My desk
-
-Counts questions brought, how many were answered without you, which need you, and
-how many arrived with a document. A donut for the share your answers already handle,
-a sparkline for the last seven days, a bar chart of what people are dealing with,
-the queue, and **what to make next** — each with a format, where to put it, and six
-filming steps.
-
-Reset before a demo: open the site, run `localStorage.clear()` in the browser console,
-reload. All data is local to one browser; nothing is collected.
+Step 6 is the loop. It's the whole product in fifteen seconds.
 
 ## Tested
 
-Chromium, 1440×950 and 390×844: every page renders, both flows complete, paste and
-file upload both produce answers, binary files don't crash it, the dashboard charts
-from real data, no horizontal overflow, no JS errors, no third-person copy anywhere.
+Chromium, 1440×950 and 390×844: typed search, suggestion chips, depth toggle,
+accordion, paste and file upload, live reply round-trip, all nine pages, no
+horizontal overflow, no JS errors, no third-person copy anywhere.
